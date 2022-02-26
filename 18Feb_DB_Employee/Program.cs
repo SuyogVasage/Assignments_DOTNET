@@ -143,9 +143,7 @@ namespace _18Feb_DB_Employee
 
                     }
                 }while (a == 0); 
-                
-
-
+               
             }
             catch (Exception ex)
             {

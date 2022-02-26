@@ -118,7 +118,6 @@ namespace _18Feb_DB_Employee.Files
                     Conn.Close();
                 }
             }
-
         }
 
         void IDataAccess2<Employee, string>.GetAllEmployeesWithMaxSalByDeptName(string id)

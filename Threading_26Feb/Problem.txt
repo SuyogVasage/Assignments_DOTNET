@@ -1,0 +1,11 @@
+﻿
+Create a Class names StoreData. THis will have two methods as follows
+	WriteDataToFile()
+		THis will Accept an Employee Information and write this on the File
+	WriteDataToDb()
+		The EMployee Information will be written into Employee TAble
+Execute both these methods on separate threads with following checks
+	If the File is not found or cannot be opened, then Abort the thread
+	If the Db Exception Occured, then abort the thread
+Once these threads are doe with its job, print the EMployee Information on the Main THread 
+(You decide this implemetation e.g. Seperate threads for File and Db Read)
