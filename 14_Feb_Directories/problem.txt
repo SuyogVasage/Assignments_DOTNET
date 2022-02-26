@@ -1,0 +1,16 @@
+﻿Read All fils from the Directory and Store is in List class  Not
+
+Let the User Select the file from which the data is read and then open the file and read data from it
+  The User Can read all data from file
+  (Mandatory) The User can read a Single Line from the file - (optional) by enter the Line Number
+
+Print all files having an extension as .txt  Done
+
+(Research by you but Mandatory submit by 28 Feb)
+Print folowing details of the file (HINT: File/FileInfo or event Stream Class)
+FileName
+FilePath
+File Extension
+Fine Size
+
+Modify the 3rd problem statement from Date:10-Feb-2022 using the Serialization  Done

@@ -1,0 +1,7 @@
+﻿-Perform CRUD Operations on Employee Table by adding Employee class and EmployeeDataAccess Class
+
+-Create a Class as 'Report', this call will have following methods
+	GetAllEmployeesByDeptName(string dname)
+	GetAllEmployeesWithMaxSalByDeptName(string dname)
+	GetSumSalaryByDeptName(string dname)
+	GetAllEmployeesByLocation(string location)

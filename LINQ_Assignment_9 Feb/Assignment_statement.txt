@@ -1,0 +1,45 @@
+﻿Create an Employee Collection with at least 50 Records with properties as
+
+EmpNo, EmpName, DeptName, Salary, Designation
+Perform Following Report Generation on the Employees Collection
+
+Print All Employees In Ascending Order of the EmpName
+Print All Employees Group by the DeptName, and also display Employee Count for each DeptName  
+Find out Sum of Salary for Employess per DeptName
+Print Employee with Max Salary Per DeptName
+Print Employee with Min Salary Per DeptName
+Print Average Salary Per DeptName 
+Print Employees by Designation Group
+Display All EMployees those are Managers, Directors only 
+Print All EMployees Having Salary in Range 25000 to 75000
+Print Employee with Second MAx Salary Per DeptName 
+Print Employee with Second Max Salary
+
+
+Calculate Tax for Each Employee as followa  //  Dept IT, HR, Admin, Sales, Account   Desig Director, Manager, Engineer, Intern, Staff
+Salary from >=20K to <=40K is 0.05%  //
+Salary from >40K to <=60K is 0.1%
+Salary <20K is 0
+Salary >60K is 0.15%
+Print All these Salaries DeptName Wise
+
+
+
+///
+Create a Department Collection with 10 Records as
+
+DeptNo, DeptName, Location, Capacity
+Modify the Employee Collection and use DeptNo instead of DeptName //CS_NetFrwk_Imperative_LINQ
+
+List Employes as
+EmpNo, EmpName, Designation, DeptName, Location, Salary
+Self-Study
+
+Read about Following Operator Method
+Fisrt(), FirstOrDefault()
+Last(), LastOrDefault()
+Count()
+(Optional)
+GroupJoin()
+ToLookUp()
+OfType()

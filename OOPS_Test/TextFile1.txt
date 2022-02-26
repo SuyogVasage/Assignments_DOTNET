@@ -1,0 +1,47 @@
+﻿1) Can overloading is possible by having same method name with same number and order of parameters but different in return type?
+>> No
+
+2) Can we override the private virtual method of abstract class using public method from the deriuved class?
+>> Can not have private method of abstract, can have public
+
+3) Can we have private and protected abstract and virtual methods in abstract base class?
+>> Virtual abstract method can not be private, Can have protected vitual and abstract
+
+4) Can we have method overloading across base and deried classe?
+>> Yes
+
+5) Can we type cast the derived class instance using the base class?
+>> No
+
+6) Can we have public property in abstract base class?
+>> Yes
+
+7) Can we have same property in base and derived class?
+>> Yes,but gives warning derived class property hide base class property.Instead use 'new' to avoid warning.
+
+8) Can we derive a public class from internal class?
+>> No, we cannot.
+
+9) Can we have internal virtual or abstract methods in abstract class?
+>> Yes
+
+10) Can we have private or protect class?
+>> No
+
+11) Can we have internal property?
+>> Yes
+
+12) Can we have virtual method in not-abstract class?
+>> Yes
+
+13) Can we have abstract method in not-abstract class?
+>> We cannot have abstract method in non-abstract class
+
+14) What will happen if the derive class dows not override all abstract methods of the abstract class?
+>> Gives error that derived class not implement abstarct method.
+
+15) Can we have virtual and/or abstract methods in sealed class?
+>> No
+
+D-16) Can we have sealed access modifier for method?
+>> Yes

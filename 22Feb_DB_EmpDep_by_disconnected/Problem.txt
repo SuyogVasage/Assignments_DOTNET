@@ -1,0 +1,3 @@
+﻿Like mentioned in Exercise 1 of Date:18-Feb-2022 
+Perform the CRUD operations on Department and Employee Table using the disconneceted architrecture by 
+adding DepartmetDataAccess and EmployeeDataAccess classes
