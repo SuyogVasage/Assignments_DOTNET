@@ -12,13 +12,15 @@ namespace Threading_26Feb
         static void Main(string[] args)
         {
             StoreData storeData = new StoreData();
-            Thread t1 = new Thread(() => storeData.WriteDateToDB());
-            Thread t2 = new Thread(() => storeData.WriteDataToFile());
-            t1.Start();
-            t2.Start();
-            //storeData.WriteDateToDB();
-            //storeData.WriteDataToFile();
-            //storeData.GetDataFromFile();
+            //storeData.GetEmpData();
+            //storeData.GetEmpNo();
+
+            Parallel.Invoke(() =>
+            {
+                storeData.GetEmpData();
+                storeData.GetEmpNo();
+            }
+            );
             Console.ReadLine();
 
         }
