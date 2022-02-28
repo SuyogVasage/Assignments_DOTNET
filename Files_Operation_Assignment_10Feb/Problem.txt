@@ -40,3 +40,8 @@ NetSalary: {NetSalary}
 -----------------------------------------------------------------
 NetSalary In Words: {Net_Salary_In_Words}
 -----------------------------------------------------------------
+
+
+
+
+Modified it with Parallel

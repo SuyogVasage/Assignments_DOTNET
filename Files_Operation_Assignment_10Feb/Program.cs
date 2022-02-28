@@ -44,16 +44,15 @@ namespace Files_Operation_Assignment_10Feb
             foreach (Employee e in employees)
             {
                 e.Gross = e.Salary + e.HRA + e.TA + e.DA;
-                if(e.Gross > 100000) { e.Tax = e.Gross * 0.3; }
+                if (e.Gross > 100000) { e.Tax = e.Gross * 0.3; }
                 if (e.Gross >= 50000 && e.Gross <= 100000) { e.Tax = e.Gross * 0.2; }
                 else { e.Tax = e.Gross * 0.1; }
 
-                e.NetSalary = (int)e.Gross - (int)e.Tax; 
+                e.NetSalary = (int)e.Gross - (int)e.Tax;
             }
-            
-            fileOp.WriteEmployeeSalarySlip(ref employees,"February");
 
-            
+            //fileOp.WriteEmployeeSalarySlipParallel("February");
+            fileOp.WriteEmployeeSalarySlipNonParallel(ref employees, "February");
             Console.ReadLine(); 
         }
     }

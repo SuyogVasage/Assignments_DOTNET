@@ -62,7 +62,7 @@ Drop function ValidateData;
 Delete from Employee where EmpNo = 123;
 Delete from Employee where EmpNo = 124;
 Delete from Employee where EmpNo = 125;
-Delete from Employee where EmpNo = 126;
+Delete from Employee where EmpNo = 128;
 
 drop proc sp_InsertEmployeeCheck;
 Delete from Employee where EmpNo = 123;
