@@ -12,15 +12,9 @@ namespace Threading_26Feb
         static void Main(string[] args)
         {
             StoreData storeData = new StoreData();
-            //storeData.GetEmpData();
-            //storeData.GetEmpNo();
+            storeData.GetEmpData();
+            storeData.GetEmpNo();
 
-            Parallel.Invoke(() =>
-            {
-                storeData.GetEmpData();
-                storeData.GetEmpNo();
-            }
-            );
             Console.ReadLine();
 
         }

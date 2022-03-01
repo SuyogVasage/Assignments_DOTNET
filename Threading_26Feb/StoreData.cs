@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Threading_26Feb
 {
@@ -129,19 +130,29 @@ namespace Threading_26Feb
             employee.Designation = Console.ReadLine();
             Console.WriteLine("Enter Email");
             employee.Email = Console.ReadLine();
+            //Parallel.Invoke(() =>
+            //{
+            //    WriteDataToFile(employee);
+            //    WriteDateToDB(employee);
+            ////}
+            //);
             Thread t1 = new Thread(() => WriteDateToDB(employee));
             Thread t2 = new Thread(() => WriteDataToFile(employee));
             t1.Start();
             t2.Start();
-            //WriteDataToFile(employee);
-            //WriteDateToDB(employee);
             return employee;
         }
 
         public int GetEmpNo()
         {
-            Console.WriteLine("Enter EmpNo to view Employee Details");
+            Console.WriteLine("\nEnter EmpNo to view Employee Details");
             int EmpNo = Convert.ToInt32(Console.ReadLine());
+            //Parallel.Invoke(() =>
+            //{
+            //    GetDataFromDB(EmpNo);
+            //    GetDataFromFile(EmpNo);
+            //}
+            //);
             Thread t1 = new Thread(() => GetDataFromDB(EmpNo));
             Thread t2 = new Thread(() => GetDataFromFile(EmpNo));
             t1.Start();
