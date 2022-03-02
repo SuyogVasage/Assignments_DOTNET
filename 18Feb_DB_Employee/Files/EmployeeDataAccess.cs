@@ -134,7 +134,6 @@ namespace _18Feb_DB_Employee.Files
             {
                 Console.WriteLine(ex.Message);
                 Console.ReadLine();
-
                 throw ex;
             }
             finally 

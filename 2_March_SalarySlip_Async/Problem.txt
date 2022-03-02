@@ -1,0 +1,8 @@
+﻿Modify the EMployee-Salary SLip application by generating Salary Slip for 
+each EMployee on a Task, once these files are generated copy all files 
+from C:\Source to C:\Destination folder with Task Continue
+
+
+Makse sure that 1 and 2 uses Exception Handling
+
+Explore Task.FromException() method

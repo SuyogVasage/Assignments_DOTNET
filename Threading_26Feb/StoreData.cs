@@ -74,6 +74,9 @@ namespace Threading_26Feb
                     employee.Designation = Reader["Designation"].ToString();
                     employee.DeptNo = Convert.ToInt32(Reader["DeptNo"]);
                     employee.Email = Reader["Email"].ToString();
+
+                    Console.WriteLine($"Data from Database\n" +
+                        $"{employee.EmpNo} {employee.EmpName}  {employee.Salary}  {employee.Designation}  {employee.DeptNo}  {employee.Email}\n");
                 }
                 Reader.Close();
             }
@@ -89,8 +92,8 @@ namespace Threading_26Feb
                     conn.Close();
                 }
             }
-            Console.WriteLine($"Data from Database\n" +
-                $"{employee.EmpNo} {employee.EmpName}  {employee.Salary}  {employee.Designation}  {employee.DeptNo}  {employee.Email}\n");
+            //Console.WriteLine($"Data from Database\n" +
+            //    $"{employee.EmpNo} {employee.EmpName}  {employee.Salary}  {employee.Designation}  {employee.DeptNo}  {employee.Email}\n");
         }
         public void GetDataFromFile(int EmpNo)
         {
@@ -116,31 +119,39 @@ namespace Threading_26Feb
 
         public Employee GetEmpData()
         {
-            Employee employee = new Employee();
-            Console.WriteLine("Enter Employee Data\n");
-            Console.WriteLine("Enter EmpNo");
-            employee.EmpNo = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Enter EmpName");
-            employee.EmpName = Console.ReadLine();
-            Console.WriteLine("Enter DeptNo");
-            employee.DeptNo = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Enter Salary");
-            employee.Salary = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Enter Designation");
-            employee.Designation = Console.ReadLine();
-            Console.WriteLine("Enter Email");
-            employee.Email = Console.ReadLine();
-            //Parallel.Invoke(() =>
-            //{
-            //    WriteDataToFile(employee);
-            //    WriteDateToDB(employee);
-            ////}
-            //);
-            Thread t1 = new Thread(() => WriteDateToDB(employee));
-            Thread t2 = new Thread(() => WriteDataToFile(employee));
-            t1.Start();
-            t2.Start();
-            return employee;
+            try
+            {
+                Employee employee = new Employee();
+                Console.WriteLine("Enter Employee Data\n");
+                Console.WriteLine("Enter EmpNo");
+                employee.EmpNo = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Enter EmpName");
+                employee.EmpName = Console.ReadLine();
+                Console.WriteLine("Enter DeptNo");
+                employee.DeptNo = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Enter Salary");
+                employee.Salary = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Enter Designation");
+                employee.Designation = Console.ReadLine();
+                Console.WriteLine("Enter Email");
+                employee.Email = Console.ReadLine();
+                //Parallel.Invoke(() =>
+                //{
+                //    WriteDataToFile(employee);
+                //    WriteDateToDB(employee);
+                ////}
+                //);
+                Thread t1 = new Thread(() => WriteDateToDB(employee));
+                Thread t2 = new Thread(() => WriteDataToFile(employee));
+                t1.Start();
+                t2.Start();
+                return employee;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
         }
 
         public int GetEmpNo()

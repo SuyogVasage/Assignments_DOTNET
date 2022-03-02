@@ -1,0 +1,7 @@
+﻿MOdify the Database Operations for Performing Asynchronous CRUD approch(Connected)
+    - CReate a Class NAmed DbOperations, this class will have each method as 'async' and 
+	this will perform 'wait'able oeprations for CRUD
+
+Makse sure that 1 and 2 uses Exception Handling
+
+Explore Task.FromException() method
