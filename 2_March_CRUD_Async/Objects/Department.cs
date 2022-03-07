@@ -12,5 +12,7 @@ namespace _2_March_CRUD_Async
         public string DeptName { get; set; }
         public string Location { get; set; }
         public int Capacity { get; set; }
+
+        public List<Department> Departments { get; set; }
     }
 }

@@ -12,8 +12,8 @@ namespace _2_March_CRUD_Async
         {
             try
             {
-                Employee emp = new Employee();
-                DbOperartion dbOperartion = new DbOperartion();
+                IDataAccess<Department, int> DeptDb = new DeptDbAccess();
+                IDataAccess<Employee, int> EmpDb = new EmpDbAccess();
                 int a = 0;
                 do
                 {
@@ -33,152 +33,140 @@ namespace _2_March_CRUD_Async
                     switch(choice)
                     {
                         case 1:
-                            var DeptData = dbOperartion.GetDeptDataAsync().Result;
+                            var DeptData = DeptDb.GetAsync().Result;
                             foreach (Department item in DeptData)
                             {
                                 Console.WriteLine($"{item.DeptNo} {item.DeptName} {item.Location} {item.Capacity}");
                             }
                             break;
                         case 2:
+                            Department dept = new Department();
                             Console.WriteLine("Enter Department details");
                             Console.WriteLine("Enter Department number");
-                            int DeptNo1 = Convert.ToInt32(Console.ReadLine());
+                            dept.DeptNo = Convert.ToInt32(Console.ReadLine());
 
                             Console.WriteLine("Enter Departname name");
-                            string DeptName12 = Console.ReadLine();
+                            dept.DeptName = Console.ReadLine();
 
                             Console.WriteLine("Enter Location");
-                            string Location1 = Console.ReadLine();
+                            dept.Location = Console.ReadLine();
 
                             Console.WriteLine("Enter Capacity");
-                            int Capacity1 = Convert.ToInt32(Console.ReadLine());
+                            dept.Capacity = Convert.ToInt32(Console.ReadLine());
 
-                            var NewDept = new Department()
-                            {
-                               DeptNo = DeptNo1,
-                               DeptName = DeptName12,
-                               Location = Location1,
-                               Capacity = Capacity1,
-
-                            };
-                            dbOperartion.CreateDeptDataAsync(NewDept);
+                            DeptDb.CreateAsync(dept);
                             break;
                         case 3:
-                            Console.WriteLine("Enter Department details");
+                            Department db1 = new Department();
+                            Console.WriteLine("Enter Department Details To Update");
                             Console.WriteLine("Enter Department number");
-                            int DeptNo = Convert.ToInt32(Console.ReadLine());
+                            db1.DeptNo = Convert.ToInt32(Console.ReadLine());
 
                             Console.WriteLine("Enter Departname name");
-                            string DeptName = Console.ReadLine();
+                            db1.DeptName = Console.ReadLine();
 
                             Console.WriteLine("Enter Location");
-                            string Location = Console.ReadLine();
+                            db1.Location = Console.ReadLine();
 
                             Console.WriteLine("Enter Capacity");
-                            int Capacity = Convert.ToInt32(Console.ReadLine());
+                            db1.Capacity = Convert.ToInt32(Console.ReadLine());
 
-                            var NewDept1 = new Department()
-                            {
-                                DeptNo = DeptNo,
-                                DeptName = DeptName,
-                                Location = Location,
-                                Capacity = Capacity,
-
-                            };
-                            dbOperartion.UpdateDeptDataAsync(NewDept1, DeptNo); 
+                            var e5 = DeptDb.UpdateAsync(db1.DeptNo, db1).Result;
+                            if (e5 == 0)
+                            { Console.WriteLine("Update Failed"); }
+                            else { Console.WriteLine("Update Success"); }
                             break;
                         case 4:
                             Console.WriteLine("Enter Department number");
                             int num4 = Convert.ToInt32(Console.ReadLine());
-                            dbOperartion.DeleteDeptDataAsync(num4);
+                            var e4 = DeptDb.DeleteAsync(num4).Result;
+                            if (e4 == 0) { Console.WriteLine("Wrong DeptNo"); }
+                            else { Console.WriteLine($"DeptNo = {num4} is deleted "); }
                             break;
                         case 5:
                             Console.WriteLine("Enter Department number");
                             int num3 = Convert.ToInt32(Console.ReadLine());
-                            var dept = dbOperartion.GetDeptDataAsync(num3).Result;
-                            Console.WriteLine($"{dept.DeptNo} {dept.DeptName} {dept.Location} {dept.Capacity}");
+                            var dept1 = DeptDb.GetAsync(num3).Result;
+                            if(dept1 == null) { Console.WriteLine("Record Not Found"); }
+                            else
+                            {
+                                Console.WriteLine($"{dept1.DeptNo} {dept1.DeptName} {dept1.Location} {dept1.Capacity}");
+                            }
                             break;
                         case 6:
-                            var EmpData = dbOperartion.GetEmpDataAsync().Result;
+                            var EmpData = EmpDb.GetAsync().Result;
                             foreach (Employee item in EmpData)
                             {
                                 Console.WriteLine($"{item.EmpNo} {item.EmpName} {item.Salary} {item.Designation} {item.DeptNo} {item.Email}");
                             }
                             break;
                         case 7:
+                            Employee empployee = new Employee(); 
                             Console.WriteLine("Enter employee details");
                             Console.WriteLine("Enter employee number");
-                            int EmpNo1 = Convert.ToInt32(Console.ReadLine());
+                            empployee.EmpNo = Convert.ToInt32(Console.ReadLine());
 
                             Console.WriteLine("Enter employee name");
-                            string EmpName1 = Console.ReadLine();
+                            empployee.EmpName = Console.ReadLine();
 
                             Console.WriteLine("Enter employee salary");
-                            int Salary1 = Convert.ToInt32(Console.ReadLine());
+                            empployee.Salary = Convert.ToInt32(Console.ReadLine());
 
                             Console.WriteLine("Enter employee department number");
-                            int DeptNo12 = Convert.ToInt32(Console.ReadLine());
+                            empployee.DeptNo = Convert.ToInt32(Console.ReadLine());
 
                             Console.WriteLine("Enter employee designation");
-                            string Designation1 = Console.ReadLine();
+                            empployee.Designation = Console.ReadLine();
 
                             Console.WriteLine("Enter employee Email ID");
-                            string Email1 = Console.ReadLine();
+                            empployee.Email = Console.ReadLine();
 
-                            var NewEmp = new Employee()
-                            {
-                                EmpNo = EmpNo1,
-                                EmpName = EmpName1,
-                                Salary = Salary1,
-                                DeptNo = DeptNo12,
-                                Designation = Designation1,
-                                Email = Email1,
-                            };
-                            dbOperartion.CreateEmpDataAsync(NewEmp);
+                            EmpDb.CreateAsync(empployee);
                             break;
                         case 8:
+                            Employee employee = new Employee();
                             Console.WriteLine("Enter employee details");
                             Console.WriteLine("Enter employee number");
-                            int EmpNo = Convert.ToInt32(Console.ReadLine());
+                            employee.EmpNo = Convert.ToInt32(Console.ReadLine());
 
                             Console.WriteLine("Enter employee name");
-                            string EmpName = Console.ReadLine();
+                            employee.EmpName = Console.ReadLine();
 
                             Console.WriteLine("Enter employee salary");
-                            int Salary = Convert.ToInt32(Console.ReadLine());
+                            employee.Salary = Convert.ToInt32(Console.ReadLine());
 
                             Console.WriteLine("Enter employee department number");
-                            int DeptNo3 = Convert.ToInt32(Console.ReadLine());
+                            employee.DeptNo = Convert.ToInt32(Console.ReadLine());
 
                             Console.WriteLine("Enter employee designation");
-                            string Designation = Console.ReadLine();
+                            employee.Designation = Console.ReadLine();
 
                             Console.WriteLine("Enter employee Email ID");
-                            string Email = Console.ReadLine();
-
-                            var UpEmp = new Employee()
-                            {
-                                EmpNo = EmpNo,
-                                EmpName = EmpName,
-                                Salary = Salary,
-                                DeptNo = DeptNo3,
-                                Designation = Designation,
-                                Email = Email,
-                            };
-                            dbOperartion.UpdateEmpDataAsync(UpEmp, EmpNo);
+                            employee.Email = Console.ReadLine();
+                            var e = EmpDb.UpdateAsync(employee.EmpNo, employee).Result;
+                            if (e == 0)
+                            { Console.WriteLine("Update Failed"); }
+                            else { Console.WriteLine("Update Success"); }
                             break;
                         case 9:
                             Console.WriteLine("Enter employee number");
                             int num1 = Convert.ToInt32(Console.ReadLine());
-                            dbOperartion.DeleteEmpDataAsync(num1);
+                            int e1 = EmpDb.DeleteAsync(num1).Result;
+                            if (e1 == 0) { Console.WriteLine("Wrong EmpNo"); }
+                            else { Console.WriteLine($"EmpNo = {num1} is deleted "); }
                             break;
                         case 10:
                             Console.WriteLine("Enter employee number");
                             int num = Convert.ToInt32(Console.ReadLine());
-                            var emps = dbOperartion.GetEmpDataAsync(num).Result;
-                            Console.WriteLine($"{emps.EmpNo} {emps.EmpName} {emps.Salary} {emps.Designation} {emps.DeptNo} {emps.Email}");
+                            var emps = EmpDb.GetAsync(num).Result;
+                            if (emps == null) { Console.WriteLine("Record Not Found"); }
+                            else
+                            {
+                                Console.WriteLine($"{emps.EmpNo} {emps.EmpName} {emps.Salary} {emps.Designation} {emps.DeptNo} {emps.Email}");
+                            }
                             break;
                         case 11:
+                            a++;
                             break;
                         default:
                             Console.WriteLine("Please enter correct choice number");

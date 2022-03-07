@@ -8,7 +8,7 @@ namespace OOPS_Test
 {
     //11) Can we have internal property?
    //>> Yes
-    internal class Q_11
+    internal class Q_111
     {
         internal string EmpName { get; set; }
     }

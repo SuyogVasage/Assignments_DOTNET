@@ -43,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbOperations.cs" />
+    <Compile Include="DeptDbAccess.cs" />
+    <Compile Include="EmpDbAccess.cs" />
+    <Compile Include="IDataAccess.cs" />
     <Compile Include="Objects\Department.cs" />
     <Compile Include="Objects\Employee.cs" />
     <Compile Include="Program.cs" />

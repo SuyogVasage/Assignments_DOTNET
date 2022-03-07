@@ -99,3 +99,6 @@ exec sp_ListEmployeeByDeptName @DeptNameCheck1 = null;
 select Department.DeptNo, DeptName, EmpNo, EmpName, Salary, Designation, Capacity , Location ,Email 
 From Department Left Join Employee 
 on Department.DeptNo = Employee.DeptNo;
+
+
+select * from Department;
