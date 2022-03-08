@@ -53,7 +53,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NetCore", "NetCore", "{D040
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CS_Single_File_Publish", "CS_Single_File_Publish\CS_Single_File_Publish.csproj", "{110A98DC-F7D9-4A25-B932-1F0D89B83140}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7_March_CRUD_EFcore", "7_March_CRUD_EFcore\7_March_CRUD_EFcore.csproj", "{88AFB600-1132-4782-851C-013810D1B6C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "7_March_CRUD_EFcore", "7_March_CRUD_EFcore\7_March_CRUD_EFcore.csproj", "{88AFB600-1132-4782-851C-013810D1B6C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "8_March_CodeFirst_EFcore", "8_March_CodeFirst_EFcore\8_March_CodeFirst_EFcore.csproj", "{F03220BD-0D40-4D27-915F-919AB3BBEBA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -145,6 +147,10 @@ Global
 		{88AFB600-1132-4782-851C-013810D1B6C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88AFB600-1132-4782-851C-013810D1B6C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88AFB600-1132-4782-851C-013810D1B6C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F03220BD-0D40-4D27-915F-919AB3BBEBA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F03220BD-0D40-4D27-915F-919AB3BBEBA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F03220BD-0D40-4D27-915F-919AB3BBEBA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F03220BD-0D40-4D27-915F-919AB3BBEBA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -152,6 +158,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{110A98DC-F7D9-4A25-B932-1F0D89B83140} = {D0403EE2-18B9-4A18-8DC2-A781384F90AD}
 		{88AFB600-1132-4782-851C-013810D1B6C2} = {D0403EE2-18B9-4A18-8DC2-A781384F90AD}
+		{F03220BD-0D40-4D27-915F-919AB3BBEBA8} = {D0403EE2-18B9-4A18-8DC2-A781384F90AD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {752F7BA5-F69B-4444-8B88-0F40F3D01F3B}

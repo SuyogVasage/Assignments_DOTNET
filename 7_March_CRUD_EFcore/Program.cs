@@ -26,7 +26,6 @@ try
                 var departments = await deptDbAccess.GetAsync();
                 Console.WriteLine($"List of Depts\n" +
                     $"{JsonSerializer.Serialize(departments)}\n");
-                Console.ReadLine();
                 break;
             case 2:
                 Department newDept = new Department();
