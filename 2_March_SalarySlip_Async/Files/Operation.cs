@@ -154,20 +154,34 @@ namespace _2_March_SalarySlip_Async.Files
         {
             string sourcePath = @"C:\Users\Coditas\source\repos\Assignments\Employee_SalarySlip";
             string targetPath = @"C:\Users\Coditas\source\repos\Assignments\Moved_salary_slip";
+            int a = 0;
             if (System.IO.Directory.Exists(sourcePath))
             {
                 string[] files = System.IO.Directory.GetFiles(sourcePath);
                 // Copy the files and overwrite destination files if they already exist.
                 foreach (string s in files)
                 {
+                    
                     // Use static Path methods to extract only the file name from the path.
                     string fileName = System.IO.Path.GetFileName(s);
-                    string destFile = System.IO.Path.Combine(targetPath, fileName);
-                    //string sourceFile = System.IO.Path.Combine(sourcePath, fileName);
-                    //string destFile = System.IO.Path.Combine(targetPath, fileName);
-                    System.IO.File.Copy(s, destFile, true);
+                    string temp = string.Empty;
+                    temp = targetPath + "\\" + fileName;
+                    if (File.Exists(temp))
+                    {
+                        a = 0;
+                    }
+                    else
+                    {
+                        string destFile = System.IO.Path.Combine(targetPath, fileName);
+                        //string sourceFile = System.IO.Path.Combine(sourcePath, fileName);
+                        //string destFile = System.IO.Path.Combine(targetPath, fileName);
+                        System.IO.File.Copy(s, destFile, true);
+                        a++;
+                    }
                 }
-                Console.WriteLine("Files moved");
+                if (a > 0) { Console.WriteLine("Files Moved"); }
+                else { Console.WriteLine("Files are already present"); }
+               
             }
             else
             {

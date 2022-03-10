@@ -1,6 +1,6 @@
-﻿using _7_March_CRUD_EFcore.Models;
-using _7_March_CRUD_EFcore;
-using System.Text.Json;
+﻿using System.Text.Json;
+using _9_March_DBFirst;
+using _9_March_DBFirst.Models;
 
 try
 {

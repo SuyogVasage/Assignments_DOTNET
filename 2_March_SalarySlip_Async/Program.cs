@@ -11,11 +11,20 @@ namespace _2_March_SalarySlip_Async
     {
         static void Main(string[] args)
         {
-            Operation op = new Operation();
-            Employees employees = new Employees();
-            Task.Factory.StartNew(() => op.WriteFiles())
-                .ContinueWith(delegate { op.moveFile(); });
-            Console.ReadLine();
+            try
+            {
+                Operation op = new Operation();
+                Employees employees = new Employees();
+                Task.Factory.StartNew(() => op.WriteFiles())
+                    .ContinueWith(delegate { op.moveFile(); });
+                Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                Task.FromException(ex);
+            }
+            
+            
         }
     }
 }
