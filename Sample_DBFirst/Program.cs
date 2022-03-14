@@ -3,4 +3,4 @@ Console.WriteLine("Hello, World!");
 
 
 
-//dotnet ef dbcontext scaffold "Data Source=SVASAGE-LAP-047\SQLEXPRESS;Initial Catalog=Clinic;Integrated Security=SSPI" Microsoft.EntityFrameworkCore.SqlServer -o Models
+//dotnet ef dbcontext scaffold "Data Source=SVASAGE-LAP-047\SQLEXPRESS;Initial Catalog=Restaurant;Integrated Security=SSPI" Microsoft.EntityFrameworkCore.SqlServer -o DB_Prop

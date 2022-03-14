@@ -73,7 +73,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample_DBFirst", "Sample_DB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleCodeFirst", "SampleCodeFirst\SampleCodeFirst.csproj", "{EEFAEAC7-B7D3-4F86-B54E-ACEEB71E22F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "11_March_Practical", "11_March_Practical\11_March_Practical.csproj", "{EAE1B8BE-8F91-4C12-B946-0DBD94FE8CA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "11_March_Practical", "11_March_Practical\11_March_Practical.csproj", "{EAE1B8BE-8F91-4C12-B946-0DBD94FE8CA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS_WebApp", "CS_WebApp\CS_WebApp.csproj", "{898463CE-C731-4F33-B0D8-8195E250D5FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -201,6 +203,10 @@ Global
 		{EAE1B8BE-8F91-4C12-B946-0DBD94FE8CA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAE1B8BE-8F91-4C12-B946-0DBD94FE8CA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAE1B8BE-8F91-4C12-B946-0DBD94FE8CA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{898463CE-C731-4F33-B0D8-8195E250D5FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{898463CE-C731-4F33-B0D8-8195E250D5FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{898463CE-C731-4F33-B0D8-8195E250D5FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{898463CE-C731-4F33-B0D8-8195E250D5FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

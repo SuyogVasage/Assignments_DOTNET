@@ -58,17 +58,18 @@ try
                 DR.Date = mdinfo.AppointmentDate;
                 Console.WriteLine("Enter Fees");
                 DR.Fees = IsPositiveDouble();
-                var newReport = await dBaccess.CreateReportAsync(DR);
                 var newpatient = await dBaccess.CreatePatientAsync(patient);
                 var newInfo = await dBaccess.CreateMDIndoAsync(mdinfo);
-                Console.WriteLine("~~~ Patient Addeed Successfully ~~~");
+                dBaccess.CreateReportAsync(DR);
+                if (newInfo == null || newpatient == null) { Console.WriteLine("Failed To Add Patient"); }
+                else { Console.WriteLine("~~~ Patient Addeed Successfully ~~~"); }
                 break;
             case 2:
-                Console.WriteLine("Enter Patient ID to to Report");
+                Console.WriteLine("Enter Info ID to to Report");
                 int ID = IsPositiveNumber(); 
                 var getInfo = await dBaccess.GetAsync(ID);
-                Console.WriteLine("ID  Name Wt BP C_HDL C_LDL S_F S_PF Medicines");
-                Console.WriteLine($"{getInfo.PatientId} {getInfo.Patientname} {getInfo.Weight} {getInfo.Bp} {getInfo.CholestrolHdl} {getInfo.CholestrolLdl} {getInfo.SugarFast} {getInfo.SugarPostFast} {getInfo.Medicine}");
+                Console.WriteLine("ID  Name Wt BP C_HDL C_LDL S_F S_PF Medicines   Date");
+                Console.WriteLine($"{getInfo.PatientId} {getInfo.Patientname} {getInfo.Weight} {getInfo.Bp} {getInfo.CholestrolHdl} {getInfo.CholestrolLdl} {getInfo.SugarFast} {getInfo.SugarPostFast} {getInfo.Medicine}  {getInfo.AppointmentDate}");
                 break;
             case 3:
                 var getAll = await dBaccess.GetAsync();
@@ -107,9 +108,10 @@ try
                 Console.WriteLine("Enter Fees");
                 double Fees = IsPositiveDouble();
                 dailyReport.Fees = Fees - Fees * 0.15;
+                dBaccess.CreateReportAsync(dailyReport);
                 var updateInfo = await dBaccess.CreateMDIndoAsync(mInfo);
-                var updateReport = await dBaccess.CreateReportAsync(dailyReport);
-                Console.WriteLine("Updated Successfully");
+                if (updateInfo == null) { Console.WriteLine("Failed To Add Patient"); }
+                else { Console.WriteLine("Updated Successfully"); }
                 break;
             case 5:
                 dBaccess.DailyReport();

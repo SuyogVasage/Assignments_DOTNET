@@ -50,7 +50,7 @@ namespace _11_March_Practical
             }
         }
 
-        public async Task<DailyReport> GetReportAsync(int id) 
+        public async Task<DailyReport> GetReportAsync(int id)
         {
             try
             {
@@ -82,51 +82,51 @@ namespace _11_March_Practical
                 return null;
             }
         }
-
-        public async Task<DailyReport> CreateReportAsync(DailyReport entity)
-        {
-            try
+             public void CreateReportAsync(DailyReport entity)
             {
-                var result = await ctx.DailyReports.AddAsync(entity);
-                await ctx.SaveChangesAsync();
-                return result.Entity; // Return newly CReated ENtity
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return null;
-            }
-        }
-
-        public async Task<MedicalInfo> CreateMDIndoAsync(MedicalInfo entity)
-        {
-            try
-            {
-                var result = await ctx.MedicalInfos.AddAsync(entity);
-                await ctx.SaveChangesAsync();
-                return result.Entity; // Return newly CReated ENtity
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return null;
+                try
+                {
+                    var result = ctx.DailyReports.AddAsync(entity);
+                    ctx.SaveChanges();
+                    // return result.Entity; // Return newly CReated ENtity
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    // return null;
+                }
             }
 
-        } 
+            public async Task<MedicalInfo> CreateMDIndoAsync(MedicalInfo entity)
+            {
+                try
+                {
+                    var result = await ctx.MedicalInfos.AddAsync(entity);
+                    await ctx.SaveChangesAsync();
+                    return result.Entity; // Return newly CReated ENtity
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return null;
+                }
 
-        public void DailyReport()
-        {
-            try
-            {
-                Console.WriteLine("Enter Date To get Daily collection (Should be in the fromat YYYY-MM-DD)");
-                DateTime dateTime = Convert.ToDateTime(Console.ReadLine());
-                var totalCollection = ctx.DailyReports.Where(x => x.Date == dateTime).Sum(x => x.Fees);
-                Console.WriteLine($"Total collection for {dateTime} is ={totalCollection} Rs.");
             }
-            catch (Exception ex)
+
+            public async Task DailyReport()
             {
-                Console.WriteLine(ex.Message);
+                try
+                {
+                    Console.WriteLine("Enter Date To get Daily collection (Should be in the fromat YYYY-MM-DD)");
+                    DateTime dateTime = Convert.ToDateTime(Console.ReadLine());
+                    var totalCollection = ctx.DailyReports.Where(x => x.Date == dateTime).Sum(x => x.Fees);
+                    Console.WriteLine($"Total collection for {dateTime} is ={totalCollection} Rs.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
         }
     }
-}
+
