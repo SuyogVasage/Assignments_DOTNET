@@ -167,34 +167,6 @@ static int IsPositiveNumber()
     return number;
 }
 
-static double IsPositiveDouble()
-{
-    double number = Convert.ToDouble(Console.ReadLine());
-    int d = 0;
-    do
-    {
-        try
-        {
-            if (number >= 0)
-            {
-                d = 0;
-            }
-            else
-            {
-                Console.WriteLine("Please enter a positive number");
-                number = Convert.ToDouble(Console.ReadLine());
-                d++;
-            }
-
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
-    } while (d > 0);
-    return number;
-}
-
 static string IsCorrectName()
 {
     string PatientName = Console.ReadLine();
@@ -237,4 +209,31 @@ static string IsCorrectMobileNum()
     return Mob;
 }
 
+static double IsPositiveDouble()
+{
+    double number = Convert.ToDouble(Console.ReadLine());
+    int d = 0;
+    do
+    {
+        try
+        {
+            if (number >= 0)
+            {
+                d = 0;
+            }
+            else
+            {
+                Console.WriteLine("Please enter a positive number");
+                number = Convert.ToDouble(Console.ReadLine());
+                d++;
+            }
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    } while (d > 0);
+    return number;
+}
 

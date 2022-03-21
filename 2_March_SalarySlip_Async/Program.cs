@@ -17,6 +17,7 @@ namespace _2_March_SalarySlip_Async
                 Employees employees = new Employees();
                 Task.Factory.StartNew(() => op.WriteFiles())
                     .ContinueWith(delegate { op.moveFile(); });
+
                 Console.ReadLine();
             }
             catch (Exception ex)
@@ -24,7 +25,7 @@ namespace _2_March_SalarySlip_Async
                 Task.FromException(ex);
             }
             
-            
         }
+
     }
 }

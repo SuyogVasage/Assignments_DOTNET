@@ -14,6 +14,8 @@ namespace _8_March_CodeFirst_EFcore.Models
         public string CourseName { get; set; }
         public int CourseDuration { get; set; }
         public int Fees { get; set; }
+
+        //Later added in 2nd migration
         public string DegreeType { get; set; } 
 
         public ICollection<Student> Students { get; set; } 

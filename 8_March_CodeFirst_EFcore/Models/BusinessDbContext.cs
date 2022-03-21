@@ -17,19 +17,11 @@ namespace _8_March_CodeFirst_EFcore.Models
 
         }
 
-        /// <summary>
-        /// Configure the Connection String
-        /// </summary>
-        /// <param name="optionsBuilder"></param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=SVASAGE-LAP-047\SQLEXPRESS;Initial Catalog=Business;Integrated Security=SSPI");
             base.OnConfiguring(optionsBuilder);
         }
-        /// <summary>
-        /// Using the FLuent APIs
-        /// </summary>
-        /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Student>()

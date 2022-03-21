@@ -136,7 +136,7 @@ namespace _2_March_SalarySlip_Async.Files
                                      $"| Net Salary in Words - {NumberToWords(emps[i].NetSalary)} rupees    |\n" +
                                      $"-----------------------------------------------------------------------");
                     fs.Close();
-                    Console.WriteLine($"Parallel Tax for Employee {emps[i].EmpNo} is = {emps[i].Tax}");
+                    Console.WriteLine($"Parallel Tax for Employee {emps[i].EmpNo} ");
                 }
                 i++;
             });
@@ -157,8 +157,7 @@ namespace _2_March_SalarySlip_Async.Files
             int a = 0;
             if (System.IO.Directory.Exists(sourcePath))
             {
-                string[] files = System.IO.Directory.GetFiles(sourcePath);
-                // Copy the files and overwrite destination files if they already exist.
+                string[] files = System.IO.Directory.GetFiles(sourcePath); 
                 foreach (string s in files)
                 {
                     
@@ -173,8 +172,6 @@ namespace _2_March_SalarySlip_Async.Files
                     else
                     {
                         string destFile = System.IO.Path.Combine(targetPath, fileName);
-                        //string sourceFile = System.IO.Path.Combine(sourcePath, fileName);
-                        //string destFile = System.IO.Path.Combine(targetPath, fileName);
                         System.IO.File.Copy(s, destFile, true);
                         a++;
                     }

@@ -69,10 +69,35 @@ insert into Employee Values (120, 'Nisha', 90000, 'Manager', 12, 'nisha@gmail.co
 Select * from Employee;
 
 Drop table Employee;
-<<<<<<< HEAD
-=======
+
+Create Table Users (
+  UserID int Primary Key,
+  UserName varchar(100) not null,
+  Password varchar(100),
+);
 
 
+Insert into Users values (101, 'Suyog', 'Gou764$');
+
+Insert into Users values (102, 'Mayur', 'jdusk87@');
+
+Insert into Users values (103, 'Yash', 'kuyuj87&*');
+
+Insert into Users values (104, 'Jahanvi', 'kuygyug656$');
+
+Insert into Users values (105, 'Shreya', 'IUTyu8687$');
+
+select * from Users
+
+alter table Employee add Tax float not null ;
+
+alter table Employee drop Column Tax
 
 
->>>>>>> e1683f04f6241c2a86d071e67a994bd0f19250e4
+use PersonInfo
+
+drop database PersonInfo
+
+select * from Persons
+
+drop table Persons

@@ -32,7 +32,7 @@ Create table DailyReport (
 	 )
 
 
-
+delete from Patient where PatientID = 5;
 
 select * from MedicalInfo;
 

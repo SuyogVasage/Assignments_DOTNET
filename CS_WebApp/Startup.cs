@@ -8,7 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using CS_WebApp.Models;
+using Microsoft.EntityFrameworkCore;
+using CS_WebApp.Services;
 namespace CS_WebApp
 {
     public class Startup
@@ -23,6 +25,23 @@ namespace CS_WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Register The DAL DBContext
+            //By passing the Connection string info
+            //By reading jey from the appsettings.json
+
+            services.AddDbContext<IndustryContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("AppConnSt"));
+            });
+
+            //Register the custom services those contains Business logic
+            //                  Service Interface, Class Implementing, Service Interface
+
+            services.AddScoped<IService<Department, int>, DeptService>();
+            services.AddScoped<IService<Employee, int>, EmpService>();
+            services.AddScoped<IService<User, int>, UserService>();
+
+
             services.AddControllersWithViews();
         }
 
@@ -46,8 +65,11 @@ namespace CS_WebApp
 
             app.UseAuthorization();
 
+            //Map with Incoming Request with the controller (MVC and API)
+            //Map the Incoming Request with Razor Views
             app.UseEndpoints(endpoints =>
             {
+                //Map with MVC Controller
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

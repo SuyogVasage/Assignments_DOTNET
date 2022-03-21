@@ -15,4 +15,3 @@ Explore Task.FromException() method
 >> This method creates a Task object whose Status property is Faulted and whose Exception 
 property contains exception. The method is commonly used when you immediately know that the
 work that a task performs will throw an exception before executing a longer code path. 
-For an example, see the FromException<TResult>(Exception) overload.

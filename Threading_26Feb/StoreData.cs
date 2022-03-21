@@ -82,8 +82,8 @@ namespace Threading_26Feb
             }
             catch (SqlException ex)
             {
-
-                throw ex;
+                Console.WriteLine(ex.Message);
+                Thread.CurrentThread.Abort();
             }
             finally
             {
