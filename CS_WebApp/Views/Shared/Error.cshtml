@@ -5,7 +5,8 @@
 
 <h1 class="text-danger">Error.</h1>
 <h2 class="text-danger">An error occurred while processing your request.</h2>
-
+@if (Model != null)
+{
 @if (Model.ShowRequestId)
 {
     <p>
@@ -23,3 +24,32 @@
     For local debugging, enable the <strong>Development</strong> environment by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>
     and restarting the app.
 </p>
+
+<h3>Hay MVC !!! These are Custom Errors</h3>
+<p>
+    <strong>
+        Error Ocured in @Model.ControllerName in @Model.ActionName method and <br/>
+        Error Message is @Model.ErrorMessage
+    </strong>
+</p>
+<hr/>
+<!--Link to GO BAck-->
+
+<a asp-action="@Model.ActionName" asp-controller="@Model.ControllerName">GO Back</a>
+
+    
+}
+else
+{
+<h3>Hey MVC !!! These are Custom Errors From Custom Exception Filter</h3>
+<p>
+    <strong>
+        Error Ocured in @ViewData["ControllerName"] in @ViewData["ActionName"] method and <br/>
+        Error Message is @ViewData["Message"]
+    </strong>
+</p>
+<hr/>
+<!--Link to GO BAck-->
+
+<a asp-action="@ViewData["ActionName"]" asp-controller="@ViewData["ControllerName"]">GO Back</a>    
+}

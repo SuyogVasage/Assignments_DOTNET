@@ -4,21 +4,24 @@ using System.Linq;
 using CS_WebApp.Services;
 using CS_WebApp;
 using CS_WebApp.Controllers;
+using System.Text.RegularExpressions;
+
 namespace CS_WebApp.Models
 {
-    public class DeptNoCapacityAttribute : ValidationAttribute
+    public class IsEmpNameAttribute : ValidationAttribute  
     {
-        DeptCapacity deptCapacity = new DeptCapacity();
         public override bool IsValid(object value)
         {
-            int result = deptCapacity.DeptNoCount(value);
-            int capacity = deptCapacity.Capacity(value);
-
-            if (result < capacity)
+            Regex re = new Regex("[A-Z][A-Za-z ]+[A-Za-z]$");
+            if (re.IsMatch(Convert.ToString(value)))
+            {
+                return true;
+            }
+            else
             {
                 return false;
             }
-            return true;
         }
     }
 }
+

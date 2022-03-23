@@ -81,9 +81,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleWebApp", "SampleWebAp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "8_March_Links", "8_March_Links", "{63AD3ACF-8729-4CF4-8484-CB48B171F5D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore_Features_Link_2", "EFCore_Features_Link_2\EFCore_Features_Link_2.csproj", "{FE9E52A9-FD21-44E6-BF9D-C4095A5DF1D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCore_Features_Link_2", "EFCore_Features_Link_2\EFCore_Features_Link_2.csproj", "{FE9E52A9-FD21-44E6-BF9D-C4095A5DF1D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS_Owned_Types", "CS_Owned_Types\CS_Owned_Types.csproj", "{9B8E089C-1DBA-40C2-A6E9-C91D5299EA08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CS_Owned_Types", "CS_Owned_Types\CS_Owned_Types.csproj", "{9B8E089C-1DBA-40C2-A6E9-C91D5299EA08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperMarket_23March", "SuperMarket_23March\SuperMarket_23March.csproj", "{C29F98B5-CE0C-4DE5-981F-A6E7E0C7E68A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -227,6 +229,10 @@ Global
 		{9B8E089C-1DBA-40C2-A6E9-C91D5299EA08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B8E089C-1DBA-40C2-A6E9-C91D5299EA08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B8E089C-1DBA-40C2-A6E9-C91D5299EA08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C29F98B5-CE0C-4DE5-981F-A6E7E0C7E68A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C29F98B5-CE0C-4DE5-981F-A6E7E0C7E68A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C29F98B5-CE0C-4DE5-981F-A6E7E0C7E68A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C29F98B5-CE0C-4DE5-981F-A6E7E0C7E68A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

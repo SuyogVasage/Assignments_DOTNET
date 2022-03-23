@@ -101,3 +101,25 @@ drop database PersonInfo
 select * from Persons
 
 drop table Persons
+
+create table RequestLogs(
+	RequestId int Identity(1,1) primary key,
+	RequestDateTime smalldatetime,
+	ControllerName varchar(100),
+	ActionName varchar(100),
+	ExecutionCompletionTime varchar(100)
+);
+
+create table ExceptionLog(
+	RequestId int Identity(1,1) primary key,
+	RequestDateTime smalldatetime,
+	ControllerName varchar(100),
+	ActionName varchar(100),
+	ExecutionCompletionTime varchar(100),
+	ExceptionType varchar(100),
+	ExceptionMessage varchar(300)
+);
+
+select * from RequestLogs
+
+select * from ExceptionLog

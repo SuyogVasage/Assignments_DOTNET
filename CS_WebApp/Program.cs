@@ -24,3 +24,5 @@ namespace CS_WebApp
                 });
     }
 }
+
+//dotnet ef dbcontext scaffold "Data Source=SVASAGE-LAP-047\SQLEXPRESS;Initial Catalog=Industry;Integrated Security=SSPI" Microsoft.EntityFrameworkCore.SqlServer -o Models --force

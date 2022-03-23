@@ -4,13 +4,12 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CS_WebApp.Models;
 using Microsoft.EntityFrameworkCore;
 using CS_WebApp.Services;
+using System;
+using CS_WebApp.CustomFilters;
+
 namespace CS_WebApp
 {
     public class Startup
@@ -40,9 +39,27 @@ namespace CS_WebApp
             services.AddScoped<IService<Department, int>, DeptService>();
             services.AddScoped<IService<Employee, int>, EmpService>();
             services.AddScoped<IService<User, int>, UserService>();
+            services.AddScoped<IService<RequestLog, int>, RequestLogsService>();
+
+            // COfigure Sessions
+            // The Session Time out is 20 Mins for Idle Request
+            services.AddDistributedMemoryCache();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+            });
 
 
-            services.AddControllersWithViews();
+            //services.AddControllersWithViews();
+            services.AddControllersWithViews(options => {
+                //options.Filters.Add(typeof(LogFilterAttribute));
+                options.Filters.Add(new LogFilterAttribute());
+                // REgister the Exception Filter
+                // The IModelMetadataProvider will be resolved by the 
+                // PIpeline
+                options.Filters.Add(typeof(AppExceptionFilterAttribute));
+            });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +79,8 @@ namespace CS_WebApp
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseAuthorization();
 

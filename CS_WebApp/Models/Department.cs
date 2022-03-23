@@ -12,14 +12,13 @@ namespace CS_WebApp.Models
         {
             Employees = new HashSet<Employee>();
         }
-
-        [Required(ErrorMessage = "DeptNo is Required")]
+        [Required]
         public int DeptNo { get; set; }
-        [Required(ErrorMessage = "DeptName is Required")]
+        [Required]
         public string DeptName { get; set; }
-        [Required(ErrorMessage = "Location is Required")]
+        [Required]
         public string Location { get; set; }
-        [Required(ErrorMessage = "Capacity is Required")]
+        [Required]
         public int Capacity { get; set; }
 
         public virtual ICollection<Employee> Employees { get; set; }

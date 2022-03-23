@@ -6,6 +6,8 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Linq;
+using CS_WebApp.CustomSession;
+using Microsoft.AspNetCore.Http;
 
 namespace CS_WebApp.Controllers
 {
@@ -20,15 +22,32 @@ namespace CS_WebApp.Controllers
         {
             employeeService = service;
             this.deptService = deptService;
+
         }
         public IActionResult Index()
         {
-            var result = employeeService.GetAsync().Result;
-            return View(result);
+            IEnumerable<Employee> res;
+
+            // read DeptNo from Session
+            int DeptNo = Convert.ToInt32(HttpContext.Session.GetInt32("DeptNo"));
+            // read the Dept object from the session
+            var dept = HttpContext.Session.GetObject<Department>("Dept");
+            if (DeptNo == 0)
+            {
+                res = employeeService.GetAsync().Result;
+            }
+            else
+            {
+                res = employeeService.GetAsync().Result.Where(e => e.DeptNo == DeptNo);
+            }
+            return View(res);
+            //var result = employeeService.GetAsync().Result;
+           // return View(result);
         }
 
         public IActionResult Create()
         {
+            //Our Method for DropDownList
             ViewBag.Department = new SelectList(deptService.GetAsync().Result.ToList(), "DeptNo", "DeptName");
             var emp = new Employee();
             return View(emp);
@@ -37,15 +56,46 @@ namespace CS_WebApp.Controllers
         [HttpPost]
         public IActionResult Create(Employee employee)
         {
-            if(ModelState.IsValid)
+            try
             {
-                var result = employeeService.CreateAsync(employee).Result;
-                return RedirectToAction("Index");
+                var emp = employeeService.GetAsync(employee.EmpNo);
+                if (emp.Result != null)
+                {
+                    throw new Exception($"Employee No {employee.EmpNo} is already present");
+                }
+                int capacity = deptService.GetAsync().Result.ToList().Where(x => x.DeptNo == employee.DeptNo).Select(x => x.Capacity).FirstOrDefault();
+                int count = employeeService.GetAsync().Result.ToList().Where(x => x.DeptNo == employee.DeptNo).Count();
+                
+                if (ModelState.IsValid) 
+                {
+                    if(capacity > count)
+                    {
+                        var result = employeeService.CreateAsync(employee).Result;
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        ViewBag.Department = new SelectList(deptService.GetAsync().Result.ToList(), "DeptNo", "DeptName");
+                        ViewBag.NewMessage = "Department Capacity is full";
+                        return View(employee);
+                    }
+                    
+                }
+                else
+                {
+                    ViewBag.Department = new SelectList(deptService.GetAsync().Result.ToList(), "DeptNo", "DeptName");
+                    ViewBag.NewMessage = "Please Enter Correct Data";
+                    return View(employee);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ViewBag.NewMessage = "Please Enter Correct Data";
-                return View(employee);
+                return View("Error", new ErrorViewModel()
+                {
+                    ControllerName = RouteData.Values["controller"].ToString(),
+                    ActionName = RouteData.Values["action"].ToString(),
+                    ErrorMessage = ex.Message
+                });
             }
             
         }
@@ -57,8 +107,15 @@ namespace CS_WebApp.Controllers
         /// <returns></returns>
         public IActionResult Edit(int id)
         {
+            //Sir's Method For DropDownList Using ViewBag
             var result = employeeService.GetAsync(id).Result;
-
+            List<SelectListItem> depts = new List<SelectListItem>();
+            foreach (var d in deptService.GetAsync().Result.ToList())
+            {
+                depts.Add(new SelectListItem(d.DeptName, d.DeptNo.ToString()));
+            }
+            // ViewBag.DeptNo = new SelectList(depts, "DeptNo", "DeptName");
+            ViewBag.DeptNo = depts;
             //return a view the record to be edited
             return View(result);
         }
@@ -73,6 +130,13 @@ namespace CS_WebApp.Controllers
             }
             else
             {
+                List<SelectListItem> depts = new List<SelectListItem>();
+                foreach (var d in deptService.GetAsync().Result.ToList())
+                {
+                    depts.Add(new SelectListItem(d.DeptName, d.DeptNo.ToString()));
+                }
+                // ViewBag.DeptNo = new SelectList(depts, "DeptNo", "DeptName");
+                ViewBag.DeptNo = depts;
                 return View(employee);
             }
         }

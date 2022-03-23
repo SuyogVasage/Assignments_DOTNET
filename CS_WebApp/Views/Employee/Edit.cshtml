@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Edit";
+
+     var departments = (List<SelectListItem>)ViewBag.DeptNo;
 }
 
 <h1>Edit</h1>
@@ -34,7 +36,10 @@
             </div>
             <div class="form-group">
                 <label asp-for="DeptNo" class="control-label"></label>
-                <input asp-for="DeptNo" class="form-control" />
+                @*<input asp-for="DeptNo" class="form-control" />*@
+                <select asp-for="DeptNo" class="form-control"
+                  asp-items='@departments'
+                ></select>
                 <span asp-validation-for="DeptNo" class="text-danger"></span>
             </div>
             <div class="form-group">

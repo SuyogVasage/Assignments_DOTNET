@@ -1,0 +1,42 @@
+﻿@model SuperMarket_23March.Models.BillMaster
+
+<h1> The Final Bill</h1>
+<form id="frmFinal" asp-controller="FinalBill" role="form">
+    <table class="table table-bordered table-condensed table-striped">
+        <thead>
+            <tr>
+                <td  colspan="2">
+                    Bill No
+                </td>
+                <td>
+                    <input type="text" asp-for="@Model.BillNo" class="form-control"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Product Name</td>
+                <td>Quantity</td>
+                <td>Row Price</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.BillDetails)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.RowPrice</td>
+            </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2">
+                    Total Bill
+                </td>
+                <td>
+                    <input type="text" asp-for="@Model.BillAmount" class="form-control" readonly/>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</form>

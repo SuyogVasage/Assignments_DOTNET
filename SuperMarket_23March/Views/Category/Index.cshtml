@@ -1,0 +1,25 @@
+﻿@model IEnumerable<SuperMarket_23March.Models.Category>
+
+@*@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>*@
+
+<table class="table table-striped table-bordered table-condensed">
+    <thead>
+        <tr>
+            <td>Category Id</td>
+            <td>Category Name</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td><a asp-controller="Category" asp-action="LoadProducts" asp-route-id="@item.CategoryId">@item.CategoryId</a></td>
+                <td>@item.CategoryName</td>
+            </tr>
+        }
+    </tbody>
+</table>
