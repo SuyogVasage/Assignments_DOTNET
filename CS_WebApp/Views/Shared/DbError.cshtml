@@ -1,2 +1,18 @@
-﻿
+﻿@{
+    ViewData["Title"] = "DbError";
+    //Layout = "~/Views/Shared/Error.cshtml";
+}
+
+<h3>Hey MVC !!! These are Database Exception </h3>
+    <strong>
+        Error Ocured in @ViewData["ControllerName"] in @ViewData["ActionName"] method and <br/>
+        Error Type is @ViewData["Type"]
+        Error Message is @ViewData["Message"] 
+
+    </strong>
+</p>
+<hr/>
+<!--Link to GO BAck-->
+
+<a asp-action="@ViewData["ActionName"]" asp-controller="@ViewData["ControllerName"]">GO Back</a>  
 

@@ -30,10 +30,11 @@ namespace CS_WebApp.Controllers
             }
             return View(deptemp);
         }
-        public IActionResult show(int id)
+        public IActionResult ShowEmps(DeptEmpList dept)
         {
+            int deptNo = dept.DeptNo;
             // return to Index View with a Route Parameter
-            return RedirectToAction("Index", new { id = id });
+            return RedirectToAction("Index", new { id = deptNo });
         }
     }
 }

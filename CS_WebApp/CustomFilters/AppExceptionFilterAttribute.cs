@@ -1,30 +1,46 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using System;
 using CS_WebApp.Models;
+using System.Diagnostics;
+
 namespace CS_WebApp.CustomFilters
 {
     public class AppExceptionFilterAttribute : ExceptionFilterAttribute
     {
+        IndustryContext ctx;
+
         private readonly IModelMetadataProvider modelMetadata;
         public AppExceptionFilterAttribute(IModelMetadataProvider modelMetadata)
         {
             this.modelMetadata = modelMetadata;
+            ctx = new IndustryContext();
         }
 
         public override void OnException(ExceptionContext context)
         {
+            var timeSpan = Stopwatch.StartNew();
             // 1. Handle Exception to Complete the Execution Process
             context.ExceptionHandled = true;
             // 2. Read the Exception MEssage
             Exception exception = context.Exception;
+           
             // 3. Start the Result Generation Process
             // a. Define a ViewResult Object
             ViewResult viewResult = new ViewResult();
+            if (exception.GetType().Name == "Exception")
+            {
+                viewResult.ViewName = "CustomError";
+            }
+            else
+            {
+                viewResult.ViewName = "DbError";
+            }
             // b. Set the View NAme (either Standard Error View or Create a Custom View)
-            viewResult.ViewName = "Error";
+           // viewResult.ViewName = "Error";
             // c. Since the View Needs data, we need to use the ViewDataDictionary
             // modelMetadata: The Current Model used in Request
             // ModelState: State of all Values for Model Objet in Current Request
@@ -33,10 +49,23 @@ namespace CS_WebApp.CustomFilters
             valuePairs["ControllerName"] = context.RouteData.Values["controller"].ToString();
             valuePairs["ActionName"] = context.RouteData.Values["action"].ToString();
             valuePairs["Message"] = exception.Message;
+            valuePairs["Type"]= exception.GetType().Name;
             // e. pass the valuePairs to ViewData property of ViewResult
             viewResult.ViewData = valuePairs;
             // f. Set the Result property of ExceptionContext to ViewResult
             context.Result = viewResult;
+
+            ExceptionLog log = new ExceptionLog()
+            {
+                ControllerName = valuePairs["controllername"].ToString(),
+                ActionName = valuePairs["actionname"].ToString(),
+                RequestDateTime = System.DateTime.Now,
+                ExecutionCompletionTime = timeSpan.Elapsed.TotalMilliseconds.ToString(),
+                ExceptionMessage = valuePairs["message"].ToString(),
+                ExceptionType = exception.GetType().Name,
+            };
+            ctx.ExceptionLogs.Add(log);
+            ctx.SaveChanges();
         }
     }
 }

@@ -63,10 +63,11 @@ namespace _14_Feb_Directories
             }
         }
 
-        public void FileInfo(int EmployeeNo)
+        public void FileInfo()//int EmployeeNo
         {
-            string filePath = $@"C:\Users\Coditas\source\repos\Assignment_1\Employee_SalarySlip\Salary-for-February, 2022-{EmployeeNo}.txt";
-            FileInfo fileInfo = new FileInfo(filePath);
+            //string filePath = $@"C:\Users\Coditas\source\repos\Assignment_1\Employee_SalarySlip\Salary-for-February, 2022-{EmployeeNo}.txt";
+            string filePath = @"C:\Users\Coditas\Documents\TechSpring_2K22.jpg";
+            FileInfo fileInfo = new FileInfo(filePath); 
             Console.WriteLine($"FileName = {fileInfo.Name}  |  Extension = {fileInfo.Extension}  |  Size = {fileInfo.Length} Bytes  |  Last Modified on {fileInfo.LastWriteTime} ");
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -11,6 +12,7 @@ namespace CS_WebApp.Models
         [Required]
         public int EmpNo { get; set; }
         [IsEmpName(ErrorMessage ="Enter Valid EmpName")]
+        [Remote("ValidateEmpName", "Employee", ErrorMessage = "Name should be FirstName MiddleName LastName")]
         public string EmpName { get; set; }
         [Required]
         public int Salary { get; set; }

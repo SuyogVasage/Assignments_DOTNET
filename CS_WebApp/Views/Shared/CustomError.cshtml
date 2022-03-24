@@ -1,8 +1,20 @@
 ﻿
 @{
     ViewData["Title"] = "CustomError";
-    Layout = "~/Views/Shared/Error.cshtml";
+    //Layout = "~/Views/Shared/Error.cshtml";
 }
 
-<h1>CustomError</h1>
+<h3>Hey MVC !!! These are Custom Errors From Custom Exception Filter</h3>
+<p>
+    <strong>
+        Error Ocured in @ViewData["ControllerName"] in @ViewData["ActionName"] method and <br/>
+        Error Type is @ViewData["Type"]
+        Error Message is @ViewData["Message"] 
+
+    </strong>
+</p>
+<hr/>
+<!--Link to GO BAck-->
+
+<a asp-action="@ViewData["ActionName"]" asp-controller="@ViewData["ControllerName"]">GO Back</a>    
 

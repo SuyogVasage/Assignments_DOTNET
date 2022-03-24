@@ -1,0 +1,27 @@
+1. download and install git from http://git-scm.com/
+2. create a repository on my computer
+   -- creating a local repository
+   ++ git init
+   == creates an empty repository on my computer
+   == .git folder is the repository
+3. create files/code/images
+4. add some files to the staging area
+   -- create a new staging area
+   ++ git add <file_name> <file_name> <file_name>
+   == git, add these files to the staging area 
+   == we want these files to be included in the current edition (a commit)
+5. we want to see the status of our repository
+   ++ git status 
+   == each file will marked as new or modified
+   == whether the file is in staging or untracked
+   == nothing to commit --> all files are in the current commit and no modifications detected
+6. add the saved files (files in our staging) to the commit area 
+    -- create a new version/commit/edition
+    ++ git commit -m "message for the edition"
+    == -m --> message 
+    == message tells us in short what was changed/added in the repository
+    == it adds the files to our commit area and creates a new version
+    == the version is assigned an id --> commit id
+7. check the commit history
+    ++ git log
+    == prints the log of our commits

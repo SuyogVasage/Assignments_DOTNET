@@ -34,13 +34,14 @@ namespace CS_WebApp.Controllers
         {
             //try
             //{
-                var dept = departmentService.GetAsync(department.DeptNo);
-                if (dept.Result != null)
-                {
-                    throw new Exception($"Department No {department.DeptNo} is already present");
-                }
+              
                     if (ModelState.IsValid)
                     {
+                        var dept = departmentService.GetAsync(department.DeptNo);
+                        if (dept.Result != null)
+                        {
+                            throw new Exception($"Department No {department.DeptNo} is already present");
+                        }
                         var result = departmentService.CreateAsync(department).Result;
                         return RedirectToAction("Index");
                     }

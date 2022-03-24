@@ -48,9 +48,9 @@ namespace _14_Feb_Directories
                         dirOp.ReadAnyLine(num1, num2);
                         break;
                     case 5:
-                        Console.WriteLine("Enter Employee number for salary slip file information (Between 101 to 150)");
-                        int num3 = Convert.ToInt32(Console.ReadLine());
-                        dirOp.FileInfo(num3);
+                        //Console.WriteLine("Enter Employee number for salary slip file information (Between 101 to 150)");
+                        //int num3 = Convert.ToInt32(Console.ReadLine());
+                        dirOp.FileInfo();
                         break;
                     case 6:
                         a++;

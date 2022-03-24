@@ -15,5 +15,7 @@ namespace CS_WebApp.Models
         public string ActionName { get; set; }
         // The Error MEssage Thrown
         public string ErrorMessage { get; set; }
+
+        public string ErrorType { get; set; }
     }
 }

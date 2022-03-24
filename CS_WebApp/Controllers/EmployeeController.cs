@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CS_WebApp.CustomSession;
 using Microsoft.AspNetCore.Http;
+using System.Text.RegularExpressions;
 
 namespace CS_WebApp.Controllers
 {
@@ -56,8 +57,12 @@ namespace CS_WebApp.Controllers
         [HttpPost]
         public IActionResult Create(Employee employee)
         {
-            try
-            {
+            //try
+            //{
+               
+                
+                if (ModelState.IsValid) 
+                {
                 var emp = employeeService.GetAsync(employee.EmpNo);
                 if (emp.Result != null)
                 {
@@ -65,10 +70,7 @@ namespace CS_WebApp.Controllers
                 }
                 int capacity = deptService.GetAsync().Result.ToList().Where(x => x.DeptNo == employee.DeptNo).Select(x => x.Capacity).FirstOrDefault();
                 int count = employeeService.GetAsync().Result.ToList().Where(x => x.DeptNo == employee.DeptNo).Count();
-                
-                if (ModelState.IsValid) 
-                {
-                    if(capacity > count)
+                if (capacity > count)
                     {
                         var result = employeeService.CreateAsync(employee).Result;
                         return RedirectToAction("Index");
@@ -87,16 +89,16 @@ namespace CS_WebApp.Controllers
                     ViewBag.NewMessage = "Please Enter Correct Data";
                     return View(employee);
                 }
-            }
-            catch (Exception ex)
-            {
-                return View("Error", new ErrorViewModel()
-                {
-                    ControllerName = RouteData.Values["controller"].ToString(),
-                    ActionName = RouteData.Values["action"].ToString(),
-                    ErrorMessage = ex.Message
-                });
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    return View("Error", new ErrorViewModel()
+            //    {
+            //        ControllerName = RouteData.Values["controller"].ToString(),
+            //        ActionName = RouteData.Values["action"].ToString(),
+            //        ErrorMessage = ex.Message
+            //    });
+            //}
             
         }
         
@@ -162,7 +164,25 @@ namespace CS_WebApp.Controllers
             return View(result);
         }
 
-      
+        public IActionResult ValidateEmpName(string EmpName)
+        {
+            int count = 0;
+            foreach (char c in EmpName)
+            {
+                if (c == ' ')
+                {
+                    count++;
+                }
+            }
+            Console.WriteLine(count);
+            //Regex re = new Regex(@"[^\S\r\n]{2,}");
+            if (count == 2)
+            {
+               return Json(true); // valid
+            }
+            return Json(false); // invalid 
+        }
+
         public static string NumberToWords(int number)
         {
             if (number == 0)

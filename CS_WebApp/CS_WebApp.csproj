@@ -19,4 +19,12 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UploadedImages\" />
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\Others\" />
+    <Folder Include="wwwroot\Text\" />
+    <Folder Include="wwwroot\PDF\" />
+  </ItemGroup>
+
 </Project>
