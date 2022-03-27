@@ -9,12 +9,14 @@ namespace CS_WebApp.Models
 {
     public partial class Employee
     {
+        [NonNegative(ErrorMessage = "Enter Positive Number")]
         [Required]
         public int EmpNo { get; set; }
         [IsEmpName(ErrorMessage ="Enter Valid EmpName")]
-        [Remote("ValidateEmpName", "Employee", ErrorMessage = "Name should be FirstName MiddleName LastName")]
+        //[Remote("ValidateEmpName", "Employee", ErrorMessage = "Name should be FirstName MiddleName LastName")]
         public string EmpName { get; set; }
         [Required]
+        [NonNegative(ErrorMessage = "Enter Positive Number")]
         public int Salary { get; set; }
         [Required]
         public string Designation { get; set; }

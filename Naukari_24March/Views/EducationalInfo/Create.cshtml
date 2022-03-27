@@ -1,0 +1,98 @@
+﻿@model Naukari_24March.Models.EducationInfo
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>EducationInfo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                <label asp-for="EduId" class="control-label"></label>
+                <input asp-for="EduId" class="form-control" />
+                <span asp-validation-for="EduId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CandidateId" class="control-label"></label>
+                <input asp-for="CandidateId" class="form-control" />
+                <span asp-validation-for="CandidateId" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="SscpassYear" class="control-label"></label>
+                <input asp-for="SscpassYear" class="form-control" />
+                <span asp-validation-for="SscpassYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sscpercentage" class="control-label"></label>
+                <input asp-for="Sscpercentage" class="form-control" />
+                <span asp-validation-for="Sscpercentage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HscpassYear" class="control-label"></label>
+                <input asp-for="HscpassYear" class="form-control" />
+                <span asp-validation-for="HscpassYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Hscpercentage" class="control-label"></label>
+                <input asp-for="Hscpercentage" class="form-control" />
+                <span asp-validation-for="Hscpercentage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiplomaPassYear" class="control-label"></label>
+                <input asp-for="DiplomaPassYear" class="form-control" />
+                <span asp-validation-for="DiplomaPassYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiplomaPercentage" class="control-label"></label>
+                <input asp-for="DiplomaPercentage" class="form-control" />
+                <span asp-validation-for="DiplomaPercentage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DegreePassYear" class="control-label"></label>
+                <input asp-for="DegreePassYear" class="form-control" />
+                <span asp-validation-for="DegreePassYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DegreePercentage" class="control-label"></label>
+                <input asp-for="DegreePercentage" class="form-control" />
+                <span asp-validation-for="DegreePercentage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DegreeName" class="control-label"></label>
+                <input asp-for="DegreeName" class="form-control" />
+                <span asp-validation-for="DegreeName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MastersPassYear" class="control-label"></label>
+                <input asp-for="MastersPassYear" class="form-control" />
+                <span asp-validation-for="MastersPassYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MastersPercentage" class="control-label"></label>
+                <input asp-for="MastersPercentage" class="form-control" />
+                <span asp-validation-for="MastersPercentage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MastersName" class="control-label"></label>
+                <input asp-for="MastersName" class="form-control" />
+                <span asp-validation-for="MastersName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Next" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

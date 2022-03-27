@@ -40,6 +40,8 @@ namespace CS_WebApp
             services.AddScoped<IService<Employee, int>, EmpService>();
             services.AddScoped<IService<User, int>, UserService>();
             services.AddScoped<IService<RequestLog, int>, RequestLogsService>();
+            services.AddScoped<IService<ExceptionLog, int>, ExceptionLogService>();
+
 
             // COfigure Sessions
             // The Session Time out is 20 Mins for Idle Request
@@ -52,7 +54,7 @@ namespace CS_WebApp
             //services.AddControllersWithViews();
             services.AddControllersWithViews(options => {
                 //options.Filters.Add(typeof(LogFilterAttribute));
-                options.Filters.Add(new LogFilterAttribute());
+                options.Filters.Add(typeof(LogFilterAttribute));
                 // REgister the Exception Filter
                 // The IModelMetadataProvider will be resolved by the 
                 // PIpeline

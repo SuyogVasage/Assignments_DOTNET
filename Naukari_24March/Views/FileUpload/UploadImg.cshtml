@@ -1,0 +1,39 @@
+﻿@model Naukari_24March.Models.ProfileData
+@{
+    ViewData["Title"] = "UploadImg";
+}
+
+<h1>Upload Image</h1>
+<!--The Current HTTP REquest with Form-ost will be having
+    the data divided into mutip parts
+    multipart/form-data
+    form-data is the Data that will be poasted with its format whih is read by the
+    HTTP 
+-->
+<form enctype="multipart/form-data" method="post">
+    <dl>
+        <dt>
+            <label asp-for="@Model.ProfilePicture"></label>
+        </dt>
+        <dd>
+            <input asp-for="@Model.ProfilePicture" type="file">
+            <span asp-validation-for="@Model.ProfilePicture"></span>
+        </dd>
+         <div class="container">
+         @Model.UploadStatus
+     </div>
+    </dl>
+    <hr/>
+    
+    <hr/>
+    <img src="~/images/@Model.FileName"   
+                         class="rounded-circle"   
+                         height="140" width="140"   
+                         asp-append-version="true" /> 
+
+    @*asp-page-handler="Upload"*@
+    <input  class="btn btn-success" type="submit" value="Next" />
+</form>
+
+
+

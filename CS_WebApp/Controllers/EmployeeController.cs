@@ -27,23 +27,44 @@ namespace CS_WebApp.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<Employee> res;
+            var resEmp = employeeService.GetAsync().Result;
+            var deptres = deptService.GetAsync().Result;
+             var Resultant = from e in resEmp
+                             join d in deptres on
+                             e.DeptNo equals d.DeptNo
+                             select new
+                             {
+                                 EmpNo = e.EmpNo,
+                                 EmpName = e.EmpName,
+                                 Salary = e.Salary,
+                                 Designation = e.Designation,
+                                 DeptName = d.DeptName,
+                                 Tax = e.Tax,
+                                 Email = e.Email
+                             };
+            List<EmployeeData> employees = new List<EmployeeData>();
+            foreach (var d in Resultant)
+            {
+                employees.Add(new EmployeeData() { EmpNo = d.EmpNo, EmpName = d.EmpName, Salary = d.Salary, Designation = d.Designation, DeptName = d.DeptName, Tax = d.Tax, Email = d.Email });
+            }
+            //IEnumerable<Employee> res;
 
-            // read DeptNo from Session
-            int DeptNo = Convert.ToInt32(HttpContext.Session.GetInt32("DeptNo"));
-            // read the Dept object from the session
-            var dept = HttpContext.Session.GetObject<Department>("Dept");
-            if (DeptNo == 0)
-            {
-                res = employeeService.GetAsync().Result;
-            }
-            else
-            {
-                res = employeeService.GetAsync().Result.Where(e => e.DeptNo == DeptNo);
-            }
-            return View(res);
+           // read DeptNo from Session
+
+            //int DeptNo = Convert.ToInt32(HttpContext.Session.GetInt32("DeptNo"));
+            //// read the Dept object from the session
+            //var dept = HttpContext.Session.GetObject<Department>("Dept");
+            //if (DeptNo == 0)
+            //{
+            //    res = employeeService.GetAsync().Result;
+            //}
+            //else
+            //{
+            //    res = employeeService.GetAsync().Result.Where(e => e.DeptNo == DeptNo);
+            //}
+            return View(employees);
             //var result = employeeService.GetAsync().Result;
-           // return View(result);
+            //return View(result);
         }
 
         public IActionResult Create()
@@ -59,8 +80,7 @@ namespace CS_WebApp.Controllers
         {
             //try
             //{
-               
-                
+
                 if (ModelState.IsValid) 
                 {
                 var emp = employeeService.GetAsync(employee.EmpNo);
@@ -69,8 +89,8 @@ namespace CS_WebApp.Controllers
                     throw new Exception($"Employee No {employee.EmpNo} is already present");
                 }
                 int capacity = deptService.GetAsync().Result.ToList().Where(x => x.DeptNo == employee.DeptNo).Select(x => x.Capacity).FirstOrDefault();
-                int count = employeeService.GetAsync().Result.ToList().Where(x => x.DeptNo == employee.DeptNo).Count();
-                if (capacity > count)
+                int countofemployee = employeeService.GetAsync().Result.ToList().Where(x => x.DeptNo == employee.DeptNo).Count();
+                if (capacity > countofemployee)
                     {
                         var result = employeeService.CreateAsync(employee).Result;
                         return RedirectToAction("Index");
@@ -166,77 +186,16 @@ namespace CS_WebApp.Controllers
 
         public IActionResult ValidateEmpName(string EmpName)
         {
-            int count = 0;
-            foreach (char c in EmpName)
-            {
-                if (c == ' ')
-                {
-                    count++;
-                }
-            }
-            Console.WriteLine(count);
-            //Regex re = new Regex(@"[^\S\r\n]{2,}");
-            if (count == 2)
+            
+            Regex re = new Regex("^([a-zA-Z]+( [a-zA-Z]+)+)$");
+            if (re.IsMatch(EmpName))
             {
                return Json(true); // valid
             }
             return Json(false); // invalid 
         }
 
-        public static string NumberToWords(int number)
-        {
-            if (number == 0)
-                return "zero";
-
-            if (number < 0)
-                return "minus " + NumberToWords(Math.Abs(number));
-
-            string words = "";
-
-            if ((number / 1000000000) > 0)
-            {
-                words += NumberToWords(number / 1000000000) + " billion ";
-                number %= 1000000000;
-            }
-
-            if ((number / 1000000) > 0)
-            {
-                words += NumberToWords(number / 1000000) + " million ";
-                number %= 1000000;
-            }
-
-            if ((number / 1000) > 0)
-            {
-                words += NumberToWords(number / 1000) + " thousand ";
-                number %= 1000;
-            }
-
-            if ((number / 100) > 0)
-            {
-                words += NumberToWords(number / 100) + " hundred ";
-                number %= 100;
-            }
-
-            if (number > 0)
-            {
-                if (words != "")
-                    words += " ";
-
-                var unitsMap = new[] { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
-                var tensMap = new[] { "zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };
-
-                if (number < 20)
-                    words += unitsMap[number];
-                else
-                {
-                    words += tensMap[number / 10];
-                    if ((number % 10) > 0)
-                        words += "-" + unitsMap[number % 10];
-                }
-            }
-
-            return words;
-        }
+        
     }
 }
 

@@ -6,18 +6,21 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using System;
 using CS_WebApp.Models;
 using System.Diagnostics;
+using CS_WebApp.Services;
 
 namespace CS_WebApp.CustomFilters
 {
     public class AppExceptionFilterAttribute : ExceptionFilterAttribute
     {
-        IndustryContext ctx;
+        private readonly IService<ExceptionLog, int> exceptionService;  
+        //IndustryContext ctx;
 
         private readonly IModelMetadataProvider modelMetadata;
-        public AppExceptionFilterAttribute(IModelMetadataProvider modelMetadata)
+        public AppExceptionFilterAttribute(IModelMetadataProvider modelMetadata, IService<ExceptionLog, int> exceptionService)
         {
             this.modelMetadata = modelMetadata;
-            ctx = new IndustryContext();
+            this.exceptionService = exceptionService;
+           // ctx = new IndustryContext();
         }
 
         public override void OnException(ExceptionContext context)
@@ -33,11 +36,11 @@ namespace CS_WebApp.CustomFilters
             ViewResult viewResult = new ViewResult();
             if (exception.GetType().Name == "Exception")
             {
-                viewResult.ViewName = "CustomError";
+                viewResult.ViewName = "DbError";
             }
             else
             {
-                viewResult.ViewName = "DbError";
+                viewResult.ViewName = "CustomError";
             }
             // b. Set the View NAme (either Standard Error View or Create a Custom View)
            // viewResult.ViewName = "Error";
@@ -64,8 +67,9 @@ namespace CS_WebApp.CustomFilters
                 ExceptionMessage = valuePairs["message"].ToString(),
                 ExceptionType = exception.GetType().Name,
             };
-            ctx.ExceptionLogs.Add(log);
-            ctx.SaveChanges();
+            exceptionService.CreateAsync(log);
+            
+
         }
     }
 }

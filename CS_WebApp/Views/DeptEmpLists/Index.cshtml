@@ -72,16 +72,19 @@
                Designation
             </th>
             <th>
-               DeptNo
+               DeptName
             </th>
             <th>
                 Email
+            </th>
+            <th>
+                Tax
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Employees) {
+@foreach (var item in Model.EmployeeDatas) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.EmpNo)
@@ -96,10 +99,13 @@
                 @Html.DisplayFor(modelItem => item.Designation)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DeptNo)
+                @Html.DisplayFor(modelItem => item.DeptName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tax)
             </td>
             <td>
             </td>

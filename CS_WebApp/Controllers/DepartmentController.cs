@@ -104,13 +104,13 @@ namespace CS_WebApp.Controllers
         }
         public IActionResult ShowEmployees(int id)
         {
-            //// Save DeptNo in session
-            HttpContext.Session.SetInt32("DeptNo", id);
-             //Get the department objet based on id
-            var dept = departmentService.GetAsync(id).Result;
-             //Save the object in session
+            // Save DeptNo in session
+            //HttpContext.Session.SetInt32("DeptNo", id);
+            ////Get the department objet based on id
+            //var dept = departmentService.GetAsync(id).Result;
+            ////Save the object in session
 
-            HttpContext.Session.SetObject<Department>("Dept", dept);
+            //HttpContext.Session.SetObject<Department>("Dept", dept);
 
             return RedirectToAction("Index", "Employee");
         }

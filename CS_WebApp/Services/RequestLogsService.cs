@@ -18,9 +18,19 @@ namespace CS_WebApp.Services
             this.ctx = ctx;
         }
 
-        Task<RequestLog> IService<RequestLog, int>.CreateAsync(RequestLog entity)
+        async Task<RequestLog> IService<RequestLog, int>.CreateAsync(RequestLog entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await ctx.RequestLogs.AddAsync(entity);
+                await ctx.SaveChangesAsync();
+                return result.Entity; // Return newly CReated ENtity
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
         }
 
         Task<RequestLog> IService<RequestLog, int>.DeleteAsync(int id)

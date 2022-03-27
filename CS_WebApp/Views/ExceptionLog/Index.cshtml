@@ -1,0 +1,66 @@
+﻿@model IEnumerable<CS_WebApp.Models.ExceptionLog>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RequestId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RequestDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ControllerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActionName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExecutionCompletionTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExceptionType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExceptionMessage)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequestId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequestDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ControllerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActionName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExecutionCompletionTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExceptionType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExceptionMessage)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

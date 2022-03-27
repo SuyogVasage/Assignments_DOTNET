@@ -12,12 +12,14 @@ namespace CS_WebApp.Models
         {
             Employees = new HashSet<Employee>();
         }
+        [NonNegative(ErrorMessage = "Enter Positive Number")]
         [Required]
         public int DeptNo { get; set; }
         [Required]
         public string DeptName { get; set; }
         [Required]
         public string Location { get; set; }
+        [NonNegative(ErrorMessage = "Enter Positive Number")]
         [Required]
         public int Capacity { get; set; }
 

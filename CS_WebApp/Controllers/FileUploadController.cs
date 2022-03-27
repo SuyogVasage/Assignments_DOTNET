@@ -77,7 +77,7 @@ namespace CS_WebApp.Controllers
                         // Create a File into the folder
                         await file.CopyToAsync(fs);
                     }
-                    data.FileName = "Text_Icon.png";
+                    data.FileName = "txt.jpg";
                 }
                 else
                 {
@@ -87,7 +87,7 @@ namespace CS_WebApp.Controllers
                         // Create a File into the folder
                         await file.CopyToAsync(fs);
                     }
-                    data.FileName = "Text_Icon.png";
+                    data.FileName = "others_icon.jpg";
                 }
                 // set the file path as FolderName/FileName
                 // var finalPath = Path.Combine(folder, postedFileName);

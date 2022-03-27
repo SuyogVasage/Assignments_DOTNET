@@ -7,9 +7,7 @@ namespace CS_WebApp.Controllers
     public class RequestLogController : Controller
     {
         private readonly IService<RequestLog, int> logService;  
-        /// <summary>
-        /// Inject The IService<Department, int> aka DeptService in it
-        /// </summary>
+        
         public RequestLogController(IService<RequestLog, int> service)
         {
             logService = service;
