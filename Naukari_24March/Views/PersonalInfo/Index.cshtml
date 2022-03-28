@@ -1,0 +1,70 @@
+﻿@model Naukari_24March.Models.PerEdu
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<p>
+    @*<a asp-action="Create">Create New</a>*@
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                CandidateId
+            </th>
+            <th>
+                FullName
+            </th>
+            <th>
+                MobileNo
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Highest Qualification
+            </th>
+            <th>
+                Photo
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.ShowInfos) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CandidateId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MobileNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+           <td>
+                @Html.DisplayFor(modelItem => item.Highest_Qualification)
+            </td>
+            <td>
+                <img src="@item.ImgPath" 
+                         class="rounded-circle"   
+                         height="140" width="140"   
+                         asp-append-version="true" />
+            </td>
+            <td>
+              | @Html.ActionLink("Details", "Details", new {  id=item.CandidateId }) |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@*<img src="~/images/@Model.FileName"   
+                         class="rounded-circle"   
+                         height="140" width="140"   
+                         asp-append-version="true" /> *@

@@ -89,7 +89,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperMarket_23March", "Supe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS_StringInterpolation", "CS_ScalarFunctions\CS_StringInterpolation.csproj", "{222BD610-11BD-485C-B95C-5D57452A0F4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Naukari_24March", "Naukari_24March\Naukari_24March.csproj", "{9F4BCF92-B58F-4BC7-B0FB-B4DA2468AADF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Naukari_24March", "Naukari_24March\Naukari_24March.csproj", "{9F4BCF92-B58F-4BC7-B0FB-B4DA2468AADF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{88961BE4-354B-4CE7-B7A4-68C3768E9771}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -245,6 +247,10 @@ Global
 		{9F4BCF92-B58F-4BC7-B0FB-B4DA2468AADF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F4BCF92-B58F-4BC7-B0FB-B4DA2468AADF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F4BCF92-B58F-4BC7-B0FB-B4DA2468AADF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88961BE4-354B-4CE7-B7A4-68C3768E9771}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88961BE4-354B-4CE7-B7A4-68C3768E9771}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88961BE4-354B-4CE7-B7A4-68C3768E9771}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88961BE4-354B-4CE7-B7A4-68C3768E9771}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

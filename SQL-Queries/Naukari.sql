@@ -44,3 +44,24 @@ select * from ProfessionalInfo
 drop table ProfessionalInfo
 
 DELETE FROM PersonalInfo WHERE CandidateID = 2;
+DELETE FROM PersonalInfo WHERE CandidateID = 3;
+DELETE FROM PersonalInfo WHERE CandidateID = 4;
+DELETE FROM PersonalInfo WHERE CandidateID = 5;
+DELETE FROM PersonalInfo WHERE CandidateID = 6;
+DELETE FROM PersonalInfo WHERE CandidateID = 7;
+DELETE FROM PersonalInfo WHERE CandidateID = 8;
+
+DELETE FROM EducationInfo WHERE CandidateID = 2;
+DELETE FROM EducationInfo WHERE CandidateID = 3;
+DELETE FROM EducationInfo WHERE CandidateID = 4;
+DELETE FROM EducationInfo WHERE CandidateID = 5;
+DELETE FROM EducationInfo WHERE CandidateID = 6;
+DELETE FROM EducationInfo WHERE CandidateID = 7;
+DELETE FROM EducationInfo WHERE CandidateID = 8;
+
+DELETE FROM ProfessionalInfo WHERE InfoID = 2;
+DELETE FROM ProfessionalInfo WHERE InfoID = 3;
+DELETE FROM ProfessionalInfo WHERE InfoID = 4;
+DELETE FROM ProfessionalInfo WHERE InfoID = 5;
+DELETE FROM ProfessionalInfo WHERE InfoID = 6;
+DELETE FROM ProfessionalInfo WHERE InfoID = 1;

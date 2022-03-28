@@ -8,6 +8,11 @@ namespace Naukari_24March.Models
         [Display(Name = "Image")]
         public IFormFile ProfilePicture { get; set; }
         public string UploadStatus { get; set; }
-        public string FileName { get; set; }
+        public string FileName { get; set; } 
+    }
+
+    public class Upload
+    {
+        public string UploadStatus { get; set; }   
     }
 }

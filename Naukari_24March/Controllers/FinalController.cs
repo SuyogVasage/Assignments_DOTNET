@@ -35,20 +35,29 @@ namespace Naukari_24March.Controllers
         [HttpPost]
         public IActionResult Create(PersonalInfo personalInfo, EducationInfo educationInfo,ProfessionalInfo professionalInfo)
         {
-            var personalInfo1 = HttpContext.Session.GetObject<PersonalInfo>("Personal");
-            personalInfo1.ImgPath = Convert.ToString(HttpContext.Session.GetString("ImgPath"));
-            personalInfo1.ResumePath = Convert.ToString(HttpContext.Session.GetString("ResumePath"));
-            var result = personalInfoService.CreateAsync(personalInfo).Result;
+            //var personalInfo1 = HttpContext.Session.GetObject<PersonalInfo>("Personal");
+            //personalInfo1.ImgPath = Convert.ToString(HttpContext.Session.GetString("ImgPath"));
+            //personalInfo1.ResumePath = Convert.ToString(HttpContext.Session.GetString("ResumePath"));
+            //var result = personalInfoService.CreateAsync(personalInfo).Result;
 
-            int id = personalInfoService.GetAsync().Result.ToList().OrderByDescending(x => x.CandidateId).Select(s => s.CandidateId).FirstOrDefault();
+            //int id = personalInfoService.GetAsync().Result.ToList().OrderByDescending(x => x.CandidateId).Select(s => s.CandidateId).FirstOrDefault();
 
-            var education = HttpContext.Session.GetObject<EducationInfo>("Education");
-            education.CandidateId = id;
-            var result1 = educationService.CreateAsync(education).Result;
+            //var education = HttpContext.Session.GetObject<EducationInfo>("Education");
+            //education.CandidateId = id;
+            //var result1 = educationService.CreateAsync(education).Result;
 
-            var professional = HttpContext.Session.GetObject<ProfessionalInfo>("Professional");
-            professional.CandidateId = id;
-            var result2 = professionalService.CreateAsync(professional).Result;
+            //var professional = HttpContext.Session.GetObject<ProfessionalInfo>("Professional");
+            //professional.CandidateId = id;
+            //var result2 = professionalService.CreateAsync(professional).Result;
+
+            //if (result != null && result1 != null && result2 != null)
+            //{
+            //    ViewBag.UploadStatus = "Data Uploaded Successfully";
+            //}
+            //else
+            //{
+            //    ViewBag.UploadStatus = "Data Uploading Failed";
+            //}
 
             return RedirectToAction("Index", "Home");
         }

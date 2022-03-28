@@ -26,13 +26,15 @@
     <hr/>
     
     <hr/>
-    <img src="~/images/@Model.FileName"   
+   @* <img src="~/images/@Model.FileName"   
                          class="rounded-circle"   
                          height="140" width="140"   
-                         asp-append-version="true" /> 
+                         asp-append-version="true" /> *@
 
     @*asp-page-handler="Upload"*@
     <input  class="btn btn-success" type="submit" value="Next" />
+
+    <a asp-action="Create" asp-controller="ProfessionalInfo">GO Back</a>
 </form>
 
 

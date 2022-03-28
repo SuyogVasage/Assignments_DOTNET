@@ -57,14 +57,15 @@ namespace Naukari_24March.Controllers
                 if (fileInfo.Extension == ".jpg")
                 {
                     var finalPath = Path.Combine(hostEnvironment.WebRootPath, "Image", postedFileName);
-                    HttpContext.Session.SetString("ImgPath", finalPath);
+                    
                     using (var fs = new FileStream(finalPath, FileMode.Create))
                     {
                         // Create a File into the folder
                         await file.CopyToAsync(fs);
                     }
                     data.FileName = file.FileName;
-
+                    var ImgPath = @$"~/Image/{file.FileName}";
+                    HttpContext.Session.SetString("ImgPath", ImgPath);
                     data.UploadStatus = "File is Uploaded Successfully";
                 }
             }
@@ -97,13 +98,14 @@ namespace Naukari_24March.Controllers
                 if (fileInfo.Extension == ".pdf")
                 {
                     var finalPath = Path.Combine(hostEnvironment.WebRootPath, "Resume", postedFileName);
-                    HttpContext.Session.SetString("ResumePath", finalPath);
                     using (var fs = new FileStream(finalPath, FileMode.Create))
                     {
                         // Create a File into the folder
                         await file.CopyToAsync(fs);
                     }
                     data.FileName = file.FileName;
+                    var ResumePath = @$"~/Resume/{file.FileName}";
+                    HttpContext.Session.SetString("ResumePath", ResumePath);
 
                     data.UploadStatus = "File is Uploaded Successfully";
                 }
@@ -112,6 +114,15 @@ namespace Naukari_24March.Controllers
             {
                 data.UploadStatus = "File is Upload Failed";
             }
+
+            return RedirectToAction("UploadData");
+        }
+
+
+        public IActionResult UploadData()  
+        {
+            Upload upload = new Upload();
+            //return View(upload);
 
             var personalInfo1 = HttpContext.Session.GetObject<PersonalInfo>("Personal");
             personalInfo1.ImgPath = Convert.ToString(HttpContext.Session.GetString("ImgPath"));
@@ -128,8 +139,18 @@ namespace Naukari_24March.Controllers
             professional.CandidateId = id;
             var result2 = professionalService.CreateAsync(professional).Result;
 
-            return RedirectToAction("Index", "Home");
+            if (result != null && result1 != null && result2 != null)
+            {
+                upload.UploadStatus = "Data Uploaded Successfully";
+            }
+            else
+            {
+                upload.UploadStatus = "Data Uploading Failed";
+
+            }
+            return View(upload);
         }
+
     }
 }
 
