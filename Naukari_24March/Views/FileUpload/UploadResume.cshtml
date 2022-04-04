@@ -5,16 +5,11 @@
 
 <h3>@ViewBag.UploadStatus</h3>
 <h1>Upload Resume</h1>
-<!--The Current HTTP REquest with Form-ost will be having
-    the data divided into mutip parts
-    multipart/form-data
-    form-data is the Data that will be poasted with its format whih is read by the
-    HTTP 
--->
 <form enctype="multipart/form-data" method="post">
     <dl>
         <dt>
-            <label asp-for="@Model.ProfilePicture"></label>
+            Resume size should be less than 5MB.
+            Resume should be only .pdf type.
         </dt>
         <dd>
             <input asp-for="@Model.ProfilePicture" type="file">
@@ -27,17 +22,9 @@
     <hr/>
     
     <hr/>
-    @*<img src="~/images/@Model.FileName"   
-                         class="rounded-circle"   
-                         height="140" width="140"   
-                         asp-append-version="true" />*@ 
-
-    @*asp-page-handler="Upload"*@
     <input  class="btn btn-success" type="submit" value="Submit" />
     
     <a asp-action="UploadImg">GO Back</a>
-
-    <@*h3>@Model.DataUploadStatus</h3>*@
 </form>
 
 

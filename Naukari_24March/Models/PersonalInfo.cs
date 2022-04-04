@@ -14,17 +14,17 @@ namespace Naukari_24March.Models
         }
 
         public int CandidateId { get; set; }
+        [IsFullName]
         public string FullName { get; set; }
+        [IsMobileNo]
         public string MobileNo { get; set; }
+        [IsEmail]
         public string Email { get; set; }
         public string Address { get; set; }
         public string ImgPath { get; set; }
         public string ResumePath { get; set; }
-        public List<ShowInfo> ShowInfos { get; set; }
 
         public virtual ICollection<EducationInfo> EducationInfos { get; set; }
         public virtual ICollection<ProfessionalInfo> ProfessionalInfos { get; set; }
-
-         
     }
 }

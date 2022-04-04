@@ -42,6 +42,8 @@ select * from EducationInfo
 select * from ProfessionalInfo
 
 drop table ProfessionalInfo
+drop table EducationInfo
+drop table PersonalInfo
 
 DELETE FROM PersonalInfo WHERE CandidateID = 2;
 DELETE FROM PersonalInfo WHERE CandidateID = 3;

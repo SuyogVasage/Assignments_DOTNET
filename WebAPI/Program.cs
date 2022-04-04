@@ -1,3 +1,4 @@
+
 // The Service Builder for all dependencies
 // Relacement for ConfigureServices() of Startup.cs
 // CReating the Hosting env. for COnfiguring all Servces
@@ -6,9 +7,43 @@
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
 // Add services to the container.
+//1. Register the DBContext in DI Container as as servive
+builder.Services.AddDbContext<ApiDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AppConnStr"));
+});
+
+builder.Services.AddDistributedRedisCache(options => {
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+});
+
+
+//2. Regiser Custom services
+builder.Services.AddScoped<IService<Category, int>, CategoryService>();
+builder.Services.AddScoped<IService<Product, int>, ProductService>();
+
 // Controll for API
-builder.Services.AddControllers();
+// Controll for API
+// 3. Now Modify the AddController() service to
+// Ignore the default JSON Serialization  for
+// Names of Model Class Properties
+builder.Services.AddControllers()
+        .AddJsonOptions(options =>
+        {
+            // SUpress the defualut Camel Casing for Property NAmes
+            options.JsonSerializerOptions.PropertyNamingPolicy = null;
+        });
+
+builder.Services.AddCors(options => {
+    options.AddPolicy("corspolicy", policy =>
+    {
+        policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+    });
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 // Generate a Mapping with API COntrolleers' URL for ROuting
 builder.Services.AddEndpointsApiExplorer();
@@ -31,7 +66,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+
 app.UseAuthorization();
+
+//Custom Middleware of Exceptions
+//app.UseRequestException();
+
+//app.UseLogRequest();
 
 // USe ROuting internally to map with the API COntroller and Call it  
 // THis uses the EndPoint as a Service using AddEndpointsApiExplorer() used in Service Collection

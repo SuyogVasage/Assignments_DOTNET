@@ -1,0 +1,107 @@
+﻿@model Naukari_24March.Models.ShowAllInfo
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+
+<h1>Candidate ID = @Html.DisplayFor(modelItem => Model.CandidateID)</h1>
+<td>                
+    <img src="@Model.ImgPath"                            
+    class="square"                            
+    height="140" width="140"
+    asp-append-version="true" />             
+</td>
+<br>
+<h2>Personal Information</h2>
+<table class="table">
+        <thead>
+            <tr>
+                <th>                Full Name           </th>
+                <th>                Mobile No           </th>
+                <th>                Email          </th>
+                <th>                Address          </th>
+                <th></th>
+                </tr>
+                </thead>
+                  <tbody>
+                 <tr>
+                 <td>  @Html.DisplayFor(modelItem => Model.FullName) </td>
+                 <td>  @Html.DisplayFor(modelItem => Model.MobileNo) </td>
+                 <td>  @Html.DisplayFor(modelItem => Model.Email)     </td>
+                 <td>  @Html.DisplayFor(modelItem => Model.Address)  </td>
+             </tr>
+             </tbody></table>
+
+<h2>Educational Information</h2>
+<table style="width:100%">  
+   
+        <tr>    
+            <td>SSC Passing Year :- </td>    
+            <td style="text-align:left"> @Html.DisplayFor(modelItem => Model.SscpassYear)</td>  
+        </tr>      
+        <tr>    
+            <td>SSC Percentage :- </td>    
+            <td style="text-align:left"> @Html.DisplayFor(modelItem => Model.Sscpercentage)</td>  
+        </tr>  
+        <tr>    
+            <td>HSC Passing Year :- </td>    
+            <td style="text-align:left"> @Html.DisplayFor(modelItem => Model.HscpassYear)</td>  
+        </tr>
+        <tr>    
+            <td>HSC Percentage :- </td>    
+            <td style="text-align:left"> @Html.DisplayFor(modelItem => Model.Hscpercentage)</td>  
+        </tr>
+         <tr>    
+            <td>Diploma Passing Year :- </td>    
+            <td style="text-align:left"> @Html.DisplayFor(modelItem => Model.DiplomaPassYear)</td>  
+        </tr>  
+         <tr>    
+            <td>Diploma Percentage :- </td>    
+            <td style="text-align:left"> @Html.DisplayFor(modelItem => Model.DiplomaPercentage)</td>  
+        </tr>  
+         <tr>    
+            <td>Bachelor's Degree :- </td>    
+            <td style="text-align:left"> @Html.DisplayFor(modelItem => Model.DegreeName)</td>  
+        </tr>  
+         <tr>    
+            <td>Bachelor's Passing Year :- </td>    
+            <td style="text-align:left"> @Html.DisplayFor(modelItem => Model.DegreePassYear)</td>  
+        </tr>  
+         <tr>    
+            <td>Bachelor's Percentage :- </td>    
+            <td style="text-align:left"> @Html.DisplayFor(modelItem => Model.DegreePercentage)</td>  
+        </tr>  
+        <tr>    
+            <td>Masters Degree :- </td>    
+            <td style="text-align:left"> @Html.DisplayFor(modelItem => Model.MastersName)</td>  
+        </tr>
+        <tr>    
+            <td>Masters Passing Year :- </td>    
+            <td style="text-align:left"> @Html.DisplayFor(modelItem => Model.MastersPassYear)</td>  
+        </tr>
+        <tr>    
+            <td>Masters Percentage :- </td>    
+            <td style="text-align:left"> @Html.DisplayFor(modelItem => Model.MastersPercentage)</td>  
+        </tr>
+        </table>
+<br>
+<h2>Professional Information</h2>  
+    <table class="table">    
+        <thead>        
+            <tr>            
+                <th>                Work Experience (years)  </th>            
+                <th>                Companies          </th> 
+                <th>                Projects           </th>         
+                </tr>    
+                </thead>    
+                <tbody>
+                 <tr>        
+                 <td>  @Html.DisplayFor(modelItem => Model.ExpInYears) </td>            
+                 <td>  @Html.DisplayFor(modelItem => Model.Companies) </td>            
+                 <td>  @Html.DisplayFor(modelItem => Model.Projects)   </td>                   
+             </tr>    
+             </tbody>
+             </table>
+             

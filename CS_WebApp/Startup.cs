@@ -43,6 +43,11 @@ namespace CS_WebApp
             services.AddScoped<IService<ExceptionLog, int>, ExceptionLogService>();
 
 
+            // COnfigure the Memory Cache
+            // THe Same memory where the Host is executing 
+            // the Application
+            services.AddMemoryCache();
+
             // COfigure Sessions
             // The Session Time out is 20 Mins for Idle Request
             services.AddDistributedMemoryCache();

@@ -24,11 +24,6 @@ namespace CS_WebApp.Models
         }
     }
 
-
-
-
-
-
     public class NonNegativeAttribute : ValidationAttribute
     {
         public override bool IsValid(object value)

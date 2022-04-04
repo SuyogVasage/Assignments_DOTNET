@@ -3,17 +3,12 @@
     ViewData["Title"] = "UploadImg";
 }
 
-<h1>Upload Image</h1>
-<!--The Current HTTP REquest with Form-ost will be having
-    the data divided into mutip parts
-    multipart/form-data
-    form-data is the Data that will be poasted with its format whih is read by the
-    HTTP 
--->
+<h1>Upload Photo</h1>
 <form enctype="multipart/form-data" method="post">
     <dl>
         <dt>
-            <label asp-for="@Model.ProfilePicture"></label>
+            Passport size photo size should be less than 500KB.
+            Photo should be only .jpg or .png type.
         </dt>
         <dd>
             <input asp-for="@Model.ProfilePicture" type="file">
@@ -26,12 +21,6 @@
     <hr/>
     
     <hr/>
-   @* <img src="~/images/@Model.FileName"   
-                         class="rounded-circle"   
-                         height="140" width="140"   
-                         asp-append-version="true" /> *@
-
-    @*asp-page-handler="Upload"*@
     <input  class="btn btn-success" type="submit" value="Next" />
 
     <a asp-action="Create" asp-controller="ProfessionalInfo">GO Back</a>

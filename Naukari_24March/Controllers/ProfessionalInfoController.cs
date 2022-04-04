@@ -4,15 +4,18 @@ using Naukari_24March.Services;
 using System;
 using Microsoft.AspNetCore.Http;
 using Naukari_24March.CustomSession;
+using System.Collections.Generic;
 
 namespace Naukari_24March.Controllers
 {
     public class ProfessionalInfoController : Controller
     {
         private readonly IService<ProfessionalInfo, int> professionalService;
+        List<ProfessionalInfo> professionalInfos;   
         public ProfessionalInfoController(IService<ProfessionalInfo, int> professionalService)
         {
             this.professionalService = professionalService;
+            professionalInfos = new List<ProfessionalInfo>();
         }
         public IActionResult Index()
         {
@@ -22,16 +25,27 @@ namespace Naukari_24March.Controllers
 
         public IActionResult Create()
         {
-            var user = new ProfessionalInfo();
-            return View(user);
+            var per = HttpContext.Session.GetObject<ProfessionalInfo>("Professional");
+            if (per == null)
+            {
+                //var user = new PersonalInfo();
+                return View(per);
+            }
+            return View(per);
         }
 
         [HttpPost]
         public IActionResult Create(ProfessionalInfo professionalInfo)
         {
-            //var result = professionalService.CreateAsync(professionalInfo).Result;
-            HttpContext.Session.SetObject<ProfessionalInfo>("Professional", professionalInfo);
-            return RedirectToAction("UploadImg", "Fileupload");
+            if (ModelState.IsValid)
+            {
+                HttpContext.Session.SetObject<ProfessionalInfo>("Professional", professionalInfo);
+                return RedirectToAction("UploadImg", "Fileupload"); 
+            }
+            else
+            {
+                return View(professionalInfo);
+            }
         }
     }
 }

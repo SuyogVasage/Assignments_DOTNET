@@ -1,13 +1,10 @@
-﻿@model Naukari_24March.Models.PerEdu
+﻿@model IEnumerable<Naukari_24March.Models.ShowInfo>
 
 @{
     ViewData["Title"] = "Index";
 }
 
 
-<p>
-    @*<a asp-action="Create">Create New</a>*@
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -33,7 +30,7 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.ShowInfos) {
+@foreach (var item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.CandidateId)
@@ -63,8 +60,3 @@
 }
     </tbody>
 </table>
-
-@*<img src="~/images/@Model.FileName"   
-                         class="rounded-circle"   
-                         height="140" width="140"   
-                         asp-append-version="true" /> *@

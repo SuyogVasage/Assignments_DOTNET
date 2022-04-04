@@ -23,8 +23,10 @@
                 <span asp-validation-for="CandidateId" class="text-danger"></span>
             </div>*@
             <div class="form-group">
-                <label asp-for="SscpassYear" class="control-label"></label>
-                <input asp-for="SscpassYear" class="form-control" />
+                <label>SSC Pass Year</label>
+                <select asp-for="SscpassYear"  asp-items="ViewBag.Passyear" class ="form-control">
+                    <option label="Select Passing Year"></option>
+                </select>
                 <span asp-validation-for="SscpassYear" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -33,8 +35,10 @@
                 <span asp-validation-for="Sscpercentage" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="HscpassYear" class="control-label"></label>
-                <input asp-for="HscpassYear" class="form-control" />
+                <label>HSC Pass Year</label>
+                <select asp-for="HscpassYear"  asp-items="ViewBag.Passyear" class ="form-control">
+                    <option label="Select Passing Year"></option>
+                </select>
                 <span asp-validation-for="HscpassYear" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -43,8 +47,10 @@
                 <span asp-validation-for="Hscpercentage" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DiplomaPassYear" class="control-label"></label>
-                <input asp-for="DiplomaPassYear" class="form-control" />
+                <label>Diploma Pass Year</label>
+                <select asp-for="DiplomaPassYear"  asp-items="ViewBag.Passyear" class ="form-control">
+                    <option label="Select Passing Year"></option>
+                </select>
                 <span asp-validation-for="DiplomaPassYear" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -53,8 +59,10 @@
                 <span asp-validation-for="DiplomaPercentage" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DegreePassYear" class="control-label"></label>
-                <input asp-for="DegreePassYear" class="form-control" />
+                <label>Bachelor's Pass Year</label>
+                <select asp-for="DegreePassYear"  asp-items="ViewBag.Passyear" class ="form-control">
+                    <option label="Select Passing Year"></option>
+                </select>
                 <span asp-validation-for="DegreePassYear" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -64,12 +72,16 @@
             </div>
             <div class="form-group">
                 <label asp-for="DegreeName" class="control-label"></label>
-                <input asp-for="DegreeName" class="form-control" />
+                <select asp-for="DegreeName"  asp-items="ViewBag.DegreeName" class ="form-control">
+                    <option label="Select Degree"></option>
+                </select>
                 <span asp-validation-for="DegreeName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MastersPassYear" class="control-label"></label>
-                <input asp-for="MastersPassYear" class="form-control" />
+                <label>Masters Pass Year</label>
+                <select asp-for="MastersPassYear"  asp-items="ViewBag.Passyear" class ="form-control">
+                    <option label="Select Passing Year"></option>
+                </select>
                 <span asp-validation-for="MastersPassYear" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -79,7 +91,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="MastersName" class="control-label"></label>
-                <input asp-for="MastersName" class="form-control" />
+                <select asp-for="MastersName"  asp-items="ViewBag.MastersName" class ="form-control">
+                    <option label="Select Degree"></option>
+                </select>
                 <span asp-validation-for="MastersName" class="text-danger"></span>
             </div>
             <div class="form-group">

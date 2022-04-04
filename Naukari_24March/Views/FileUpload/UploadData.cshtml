@@ -6,7 +6,9 @@
 <h1>@ViewBag.UploadStatus</h1>
 <form asp-action="UploadData">
      <div class="container">
-         @Model.UploadStatus
+        <b>@Model.UploadStatus</b> <br>
+         Your Candidate ID = <b>@ViewBag.ID</b>
+         Please Keep it for Reference.
      </div>
 <a asp-action="Index" asp-controller="Home">Finish</a>
 </form>  

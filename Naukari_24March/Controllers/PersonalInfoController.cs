@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Naukari_24March.CustomSession;
 using System.Linq;
 using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Naukari_24March.Controllers
 {
@@ -13,63 +15,104 @@ namespace Naukari_24March.Controllers
     {
         private readonly IService<PersonalInfo, int> personalInfoService;
         private readonly IService<EducationInfo, int> educationService;
+        private readonly IService<ProfessionalInfo, int> professionalService;
+        //private readonly IFormFile fileProvider;
 
-        public PersonalInfoController(IService<PersonalInfo, int> personalInfoService, IService<EducationInfo, int> educationService)
+        public PersonalInfoController(IService<PersonalInfo, int> personalInfoService, IService<EducationInfo, int> educationService, IService<ProfessionalInfo, int> professionalService)
         {
             this.personalInfoService = personalInfoService;
             this.educationService = educationService;
+            this.professionalService = professionalService;
+            //this.fileProvider = fileProvider;
         }
         public IActionResult Index()
         {
-            var pInfo = new PerEdu();
-            
-            pInfo.eduInfos= educationService.GetAsync().Result.ToList();
-            pInfo.personalInfos = personalInfoService.GetAsync().Result.ToList();
-            foreach (var item in pInfo.eduInfos)
+            var personalData = personalInfoService.GetAsync().Result.ToList();
+
+            List<ShowInfo> details = new List<ShowInfo>();
+
+            foreach (var item in personalData)
             {
-                if(item.MastersName == null)
+                var edu = educationService.GetAsync().Result.Where(x => x.CandidateId == item.CandidateId).FirstOrDefault();
+                var highestQualification = string.Empty;
+                if (edu.MastersName == null)
                 {
-                    string HighQ = item.DegreeName;
+                    highestQualification = edu.DegreeName;
                 }
-                else
+                else 
                 {
-                    string HighQ = item.MastersName;
+                    highestQualification = edu.MastersName;
                 }
+               
+                ShowInfo info = new ShowInfo()
+                {
+                    CandidateId = item.CandidateId,
+                    FullName = item.FullName,
+                    MobileNo = item.MobileNo,
+                    Email = item.Email,
+                    Highest_Qualification = highestQualification,
+                    ImgPath = item.ImgPath
+                };
+                details.Add(info);
             }
-            var Resultant = from p in pInfo.personalInfos
-                            join e in pInfo.eduInfos on
-                            p.CandidateId equals e.CandidateId
-                            select new
-                            {
-                                CandidateID = p.CandidateId,
-                                FullName = p.FullName,
-                                MobileNo = p.MobileNo,
-                                Email = p.Email,
-                                Highest_Qualification = e.DegreeName,
-                                ImgPath = p.ImgPath
-                            };
-            pInfo.ShowInfos = new List<ShowInfo>();
-            //List<ShowInfo> infoList = new List<ShowInfo>();
-            foreach (var d in Resultant)
-            {
-                pInfo.ShowInfos.Add(new ShowInfo() { CandidateId = d.CandidateID, FullName = d.FullName, MobileNo = d.MobileNo, Email = d.Email, Highest_Qualification = d.Highest_Qualification, ImgPath = d.ImgPath});
-            }
-            return View(pInfo);
+            return View(details);
         }
 
         public IActionResult Create()
         {
-            var user = new PersonalInfo();
-            return View(user);
+            var per = HttpContext.Session.GetObject<PersonalInfo>("Personal");
+            if (per == null)
+            {
+                return View(per);
+            }
+            return View(per);
         }
 
         [HttpPost]
         public IActionResult Create(PersonalInfo personalInfo)
         {
-            //var result = personalInfoService.CreateAsync(personalInfo).Result;
-            HttpContext.Session.SetObject<PersonalInfo>("Personal", personalInfo);
-            
-            return RedirectToAction("Create", "EducationalInfo");
+            if (ModelState.IsValid)
+            {
+                HttpContext.Session.SetObject<PersonalInfo>("Personal", personalInfo);
+                return RedirectToAction("Create", "EducationalInfo"); 
+            }
+            else
+            {
+                return View(personalInfo);
+            }
+        }
+
+        public IActionResult Details( int id)
+        {
+            var education = educationService.GetAsync().Result.ToList().Where(x=>x.CandidateId == id).FirstOrDefault();
+            var personal = personalInfoService.GetAsync(id).Result;
+            var professional = professionalService.GetAsync().Result.ToList().Where(x => x.CandidateId == id).FirstOrDefault();
+
+            ShowAllInfo show = new ShowAllInfo()
+            {
+                CandidateID = personal.CandidateId,
+                FullName = personal.FullName,
+                MobileNo = personal.MobileNo,
+                Email = personal.Email,
+                Address = personal.Address,
+                SscpassYear = education.SscpassYear,
+                Sscpercentage = education.Sscpercentage,
+                HscpassYear = education.HscpassYear,
+                Hscpercentage = education.Hscpercentage,
+                DiplomaPassYear = education.DiplomaPassYear,
+                DiplomaPercentage = education.DiplomaPercentage,
+                DegreeName = education.DegreeName,
+                DegreePassYear = education.DegreePassYear,
+                DegreePercentage = education.DegreePercentage,
+                MastersName = education .MastersName,
+                MastersPassYear = education.MastersPassYear,
+                MastersPercentage = education.MastersPercentage,
+                ExpInYears = professional.ExpInYears,
+                Companies = professional.Companies,
+                Projects = professional.Projects,
+                ImgPath = personal.ImgPath,
+            };
+            return View(show);
         }
     }
 }

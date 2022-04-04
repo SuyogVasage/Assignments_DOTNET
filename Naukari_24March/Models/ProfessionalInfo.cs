@@ -9,6 +9,7 @@ namespace Naukari_24March.Models
     {
         public int InfoId { get; set; }
         public int CandidateId { get; set; }
+        [NonNegative]
         public double? ExpInYears { get; set; }
         public string Companies { get; set; }
         public string Projects { get; set; }

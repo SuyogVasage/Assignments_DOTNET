@@ -35,7 +35,7 @@ namespace Naukari_24March.Models
             modelBuilder.Entity<EducationInfo>(entity =>
             {
                 entity.HasKey(e => e.EduId)
-                    .HasName("PK__Educatio__1FD9496EC56ED891");
+                    .HasName("PK__Educatio__1FD9496E504145F4");
 
                 entity.ToTable("EducationInfo");
 
@@ -64,13 +64,13 @@ namespace Naukari_24March.Models
                     .WithMany(p => p.EducationInfos)
                     .HasForeignKey(d => d.CandidateId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Education__Candi__38996AB5");
+                    .HasConstraintName("FK__Education__Candi__5EBF139D");
             });
 
             modelBuilder.Entity<PersonalInfo>(entity =>
             {
                 entity.HasKey(e => e.CandidateId)
-                    .HasName("PK__Personal__DF539BFC997BC250");
+                    .HasName("PK__Personal__DF539BFC984F9E00");
 
                 entity.ToTable("PersonalInfo");
 
@@ -110,7 +110,7 @@ namespace Naukari_24March.Models
             modelBuilder.Entity<ProfessionalInfo>(entity =>
             {
                 entity.HasKey(e => e.InfoId)
-                    .HasName("PK__Professi__4DEC9D9ACB75EBCC");
+                    .HasName("PK__Professi__4DEC9D9AF020CC60");
 
                 entity.ToTable("ProfessionalInfo");
 
@@ -130,7 +130,7 @@ namespace Naukari_24March.Models
                     .WithMany(p => p.ProfessionalInfos)
                     .HasForeignKey(d => d.CandidateId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Professio__Candi__49C3F6B7");
+                    .HasConstraintName("FK__Professio__Candi__619B8048");
             });
 
             OnModelCreatingPartial(modelBuilder);
