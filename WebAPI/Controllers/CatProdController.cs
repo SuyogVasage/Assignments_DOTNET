@@ -16,31 +16,44 @@ namespace WebAPI.Controllers
             this.prodService = prodService;
         }
 
+//        [HttpPost]
+//        public IActionResult Post(CatProd product)
+//        {
+//            if (ModelState.IsValid)
+//            {
+//                var cat = new Category()
+//                {
+//                    CategoryID = product.CategoryId,
+//                    CategoryName = product.CategoryName,
+//                    BasePrice = product.BasePrice,
+//                };
+//                var catResultant = catService.CreateAsync(cat).Result;
+//#pragma warning disable CS8602 // Dereference of a possibly null reference.
+//                foreach (var item in product.Products)
+//                {
+//                    item.CategoryRowID = catResultant.CategoryRowID;
+//                    var res = prodService.CreateAsync(item).Result;
+//                }
+//#pragma warning restore CS8602 // Dereference of a possibly null reference.
+//                return Ok(product);
+//            }
+//            else
+//            {
+//                return BadRequest(ModelState);
+//            }
+//        }
+
         [HttpPost]
-        public IActionResult Post(CatProd product)
+        public async Task<IActionResult> Post(categProd catpro)
         {
-            if (ModelState.IsValid)
+            var catResultant = await catService.CreateAsync(catpro.Category);
+            foreach (var item in catpro.Products)
             {
-                var cat = new Category()
-                {
-                    CategoryID = product.CategoryId,
-                    CategoryName = product.CategoryName,
-                    BasePrice = product.BasePrice,
-                };
-                var catResultant = catService.CreateAsync(cat).Result;
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
-                foreach (var item in product.Products)
-                {
-                    item.CategoryRowID = catResultant.CategoryRowID;
-                    var res = prodService.CreateAsync(item).Result;
-                }
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
-                return Ok(product);
+                item.CategoryRowID = catResultant.CategoryRowID;
+                var res = await prodService.CreateAsync(item);
             }
-            else
-            {
-                return BadRequest(ModelState);
-            }
+
+            return Ok("Done");
         }
 
 

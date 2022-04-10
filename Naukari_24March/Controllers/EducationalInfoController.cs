@@ -24,6 +24,36 @@ namespace Naukari_24March.Controllers
 
         public IActionResult Create()
         {
+            ListItem();
+
+            var per = HttpContext.Session.GetObject<EducationInfo>("Education");
+            if (per == null)
+            {
+                //var user = new PersonalInfo();
+                return View(per);
+            }
+            return View(per);
+        }
+
+        [HttpPost]
+        public IActionResult Create(EducationInfo eduInfo)
+        {
+            ListItem();
+            if (ModelState.IsValid)
+            {
+                //var result = educationService.CreateAsync(eduInfo).Result;
+                HttpContext.Session.SetObject<EducationInfo>("Education", eduInfo);
+                return RedirectToAction("Create", "ProfessionalInfo");
+            }
+            else
+            {
+                return View(eduInfo);
+            }
+            
+        }
+
+        public void ListItem()
+        {
             List<SelectListItem> Year = new List<SelectListItem>();
             for (int i = 2010; i <= 2022; i++)
             {
@@ -72,29 +102,6 @@ namespace Naukari_24March.Controllers
             MastersName.Add(new SelectListItem() { Text = "MCA", Value = "MCA" });
 
             ViewBag.MastersName = MastersName;
-            var per = HttpContext.Session.GetObject<EducationInfo>("Education");
-            if (per == null)
-            {
-                //var user = new PersonalInfo();
-                return View(per);
-            }
-            return View(per);
-        }
-
-        [HttpPost]
-        public IActionResult Create(EducationInfo eduInfo)
-        {
-            if(ModelState.IsValid)
-            {
-                //var result = educationService.CreateAsync(eduInfo).Result;
-                HttpContext.Session.SetObject<EducationInfo>("Education", eduInfo);
-                return RedirectToAction("Create", "ProfessionalInfo");
-            }
-            else
-            {
-                return View(eduInfo);
-            }
-            
         }
     }
 }

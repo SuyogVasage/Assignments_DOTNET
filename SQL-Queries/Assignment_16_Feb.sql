@@ -98,4 +98,9 @@ Go
 
 Exec sp_InsertEmployee @EmpNo=121, @EmpName='Kumar', @salary=15000,@Designation ='Intern' ,@DeptNo=12, @Email = 'kumar@gmail.com';
 Go;
+
+
+
+select EmpNo, EmpName, Designation, Salary, Email from Employee
+where Designation in ('Manager', 'Clerk')
  

@@ -9,9 +9,11 @@ using System.Linq;
 using CS_WebApp.CustomSession;
 using Microsoft.AspNetCore.Http;
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CS_WebApp.Controllers
 {
+    [Authorize]
     public class EmployeeController : Controller
     {
         private readonly IService<Employee, int> employeeService;

@@ -34,58 +34,58 @@
              </tr>
              </tbody></table>
 
-<h2>Educational Information</h2>
-<table style="width:100%">  
-   
-        <tr>    
-            <td>SSC Passing Year :- </td>    
-            <td style="text-align:left"> @Html.DisplayFor(modelItem => Model.SscpassYear)</td>  
-        </tr>      
-        <tr>    
-            <td>SSC Percentage :- </td>    
-            <td style="text-align:left"> @Html.DisplayFor(modelItem => Model.Sscpercentage)</td>  
-        </tr>  
-        <tr>    
-            <td>HSC Passing Year :- </td>    
-            <td style="text-align:left"> @Html.DisplayFor(modelItem => Model.HscpassYear)</td>  
-        </tr>
-        <tr>    
-            <td>HSC Percentage :- </td>    
-            <td style="text-align:left"> @Html.DisplayFor(modelItem => Model.Hscpercentage)</td>  
-        </tr>
-         <tr>    
-            <td>Diploma Passing Year :- </td>    
-            <td style="text-align:left"> @Html.DisplayFor(modelItem => Model.DiplomaPassYear)</td>  
-        </tr>  
-         <tr>    
-            <td>Diploma Percentage :- </td>    
-            <td style="text-align:left"> @Html.DisplayFor(modelItem => Model.DiplomaPercentage)</td>  
-        </tr>  
-         <tr>    
-            <td>Bachelor's Degree :- </td>    
-            <td style="text-align:left"> @Html.DisplayFor(modelItem => Model.DegreeName)</td>  
-        </tr>  
-         <tr>    
-            <td>Bachelor's Passing Year :- </td>    
-            <td style="text-align:left"> @Html.DisplayFor(modelItem => Model.DegreePassYear)</td>  
-        </tr>  
-         <tr>    
-            <td>Bachelor's Percentage :- </td>    
-            <td style="text-align:left"> @Html.DisplayFor(modelItem => Model.DegreePercentage)</td>  
-        </tr>  
-        <tr>    
-            <td>Masters Degree :- </td>    
-            <td style="text-align:left"> @Html.DisplayFor(modelItem => Model.MastersName)</td>  
-        </tr>
-        <tr>    
-            <td>Masters Passing Year :- </td>    
-            <td style="text-align:left"> @Html.DisplayFor(modelItem => Model.MastersPassYear)</td>  
-        </tr>
-        <tr>    
-            <td>Masters Percentage :- </td>    
-            <td style="text-align:left"> @Html.DisplayFor(modelItem => Model.MastersPercentage)</td>  
-        </tr>
-        </table>
+<h4>Educational Information</h4>
+<table class="table">
+        <thead>
+            <tr>
+                <th>                Education Type           </th>
+                <th>                Passing Year            </th>
+                <th>                Percentage           </th>
+                <th>                Degree Name          </th>
+                <th></th>
+                </tr>
+                </thead>
+                  <tbody>
+                 <tr>
+                 <td>  SSC</td>
+                 <td>  @Html.DisplayFor(modelItem => Model.SscpassYear) </td>
+                 <td>  @Html.DisplayFor(modelItem => Model.Sscpercentage) </td>
+             </tr>
+             @if(Model.HscpassYear!=null)
+        {
+             <tr>
+                 <td>HSC</td>
+                  <td>  @Html.DisplayFor(modelItem => Model.HscpassYear) </td>
+                 <td>  @Html.DisplayFor(modelItem => Model.Hscpercentage) </td>
+             </tr>
+        }
+        @if(Model.DiplomaPassYear!=null)
+        {
+             <tr>
+                 <td>Diploma</td>
+                  <td>  @Html.DisplayFor(modelItem => Model.DiplomaPassYear) </td>
+                 <td>  @Html.DisplayFor(modelItem => Model.DiplomaPercentage) </td>
+             </tr>
+        }
+             
+        
+             <tr>
+                 <td>Degree</td>
+                  <td>  @Html.DisplayFor(modelItem => Model.DegreePassYear) </td>
+                 <td>  @Html.DisplayFor(modelItem => Model.DegreePercentage) </td>
+                 <td>  @Html.DisplayFor(modelItem => Model.DegreeName)     </td>
+             </tr>
+        
+         @if(Model.MastersPassYear!=null)
+        {
+            <tr>
+                 <td>Masters</td>
+                  <td>  @Html.DisplayFor(modelItem => Model.MastersPassYear) </td>
+                 <td>  @Html.DisplayFor(modelItem => Model.MastersPercentage) </td>
+                 <td>  @Html.DisplayFor(modelItem => Model.MastersName)     </td>
+             </tr>
+        }
+         </tbody></table>
 <br>
 <h2>Professional Information</h2>  
     <table class="table">    

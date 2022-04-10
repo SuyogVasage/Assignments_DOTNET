@@ -8,4 +8,10 @@
         public int BasePrice { get; set; }
         public List<Product>? Products { get; set; }
     }
+
+    public class categProd
+    {
+        public Category Category { get; set; }
+        public List<Product> Products { get; set; }
+    }
 }

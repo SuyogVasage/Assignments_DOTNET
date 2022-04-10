@@ -4,6 +4,7 @@ using CS_WebApp.Services;
 using System;
 using CS_WebApp.CustomSession;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CS_WebApp.Controllers
 {
@@ -22,7 +23,8 @@ namespace CS_WebApp.Controllers
             var result = departmentService.GetAsync().Result;
             return View(result);
         }
-
+        //Securing actions
+        [Authorize]
         public IActionResult Create()
         {
             var dept = new Department();
@@ -72,6 +74,7 @@ namespace CS_WebApp.Controllers
         /// Route parameter as 'id' (
         /// </summary>
         /// <returns></returns>
+        [Authorize]
         public IActionResult Edit(int id)
         {
                 var result = departmentService.GetAsync(id).Result;
@@ -94,7 +97,7 @@ namespace CS_WebApp.Controllers
             }
             
         }
-
+        [Authorize]
         public IActionResult Delete(int id)
         {
             var result = departmentService.DeleteAsync(id).Result;

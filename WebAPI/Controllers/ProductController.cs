@@ -45,10 +45,16 @@ namespace WebAPI.Controllers
         public IActionResult Post(Product prod)
         {
             var bPrice = catServ.GetAsync().Result.Where(x => x.CategoryRowID == prod.CategoryRowID).Select(y => y.BasePrice).FirstOrDefault();
+            if (prod.Price < 0)
+            {
+                return BadRequest("Product Price Should be Positive");
+            }
+
             if (prod.Price < bPrice)
             {
                 return BadRequest("The Product Price Cannot be less than Base Price of Category");
             }
+            
 
             if (ModelState.IsValid)
             {

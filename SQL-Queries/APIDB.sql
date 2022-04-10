@@ -12,3 +12,6 @@ select * from Categories
 select * from Products
 
 select * from ExceptionLogs
+
+select * from RequestLogs
+

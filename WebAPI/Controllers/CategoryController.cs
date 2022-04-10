@@ -85,6 +85,10 @@ namespace WebAPI.Controllers
         public IActionResult Delete(int id)
         {
             var res = catServ.DeleteAsync(id).Result;
+            if(res == null)
+            {
+                throw new Exception("Invaid ID");
+            }
             return Ok(res);
         }
     }

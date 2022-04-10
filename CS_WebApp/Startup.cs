@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using CS_WebApp.Services;
 using System;
 using CS_WebApp.CustomFilters;
+using Microsoft.AspNetCore.Identity;
+using CS_WebApp.Data;
 
 namespace CS_WebApp
 {
@@ -33,6 +35,22 @@ namespace CS_WebApp
                 options.UseSqlServer(Configuration.GetConnectionString("AppConnSt"));
             });
 
+            //Addition for Identity from IdentityHostingStartup.cs class
+            //
+            services.AddDbContext<CS_WebAppContext>(options =>
+                    options.UseSqlServer(
+                        Configuration.GetConnectionString("CS_WebAppContextConnection")));
+            //Register identity provider classes in Dependency Container
+            //UserManager<IdentityUser> : User management (CRUD)
+            //SignInManger<IsentityUser> : User Login Management
+            services.AddDefaultIdentity<IdentityUser>()
+            //(options => 
+            //Navigate to the confirm Email page when new user is registerd
+            //options.SignIn.RequireConfirmedAccount = true)
+            //Connect to DB for security using EFCore
+            .AddEntityFrameworkStores<CS_WebAppContext>();
+            // .AddDefaultUI();
+
             //Register the custom services those contains Business logic
             //                  Service Interface, Class Implementing, Service Interface
 
@@ -42,7 +60,7 @@ namespace CS_WebApp
             services.AddScoped<IService<RequestLog, int>, RequestLogsService>();
             services.AddScoped<IService<ExceptionLog, int>, ExceptionLogService>();
 
-
+           
             // COnfigure the Memory Cache
             // THe Same memory where the Host is executing 
             // the Application
@@ -56,15 +74,20 @@ namespace CS_WebApp
             });
 
 
-            //services.AddControllersWithViews();
-            services.AddControllersWithViews(options => {
+           
+           // services.AddControllersWithViews(options => {
                 //options.Filters.Add(typeof(LogFilterAttribute));
-                options.Filters.Add(typeof(LogFilterAttribute));
+                // Comment Becoz of Razor Views
+                //options.Filters.Add(typeof(LogFilterAttribute));
                 // REgister the Exception Filter
                 // The IModelMetadataProvider will be resolved by the 
                 // PIpeline
-                options.Filters.Add(typeof(AppExceptionFilterAttribute));
-            });
+                // Comment Becoz of Razor Views
+                //options.Filters.Add(typeof(AppExceptionFilterAttribute));
+
+           // });
+            //Add service to support an wxecution of Razpor Pages for Identity
+            services.AddRazorPages();
 
 
         }
@@ -85,9 +108,13 @@ namespace CS_WebApp
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            //genrate Route table
             app.UseRouting();
 
             app.UseSession();
+
+            //Middleware for User Authentication
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
@@ -99,6 +126,8 @@ namespace CS_WebApp
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                //Map Request to Razor View for Identity Pages
+            endpoints.MapRazorPages();
             });
         }
     }

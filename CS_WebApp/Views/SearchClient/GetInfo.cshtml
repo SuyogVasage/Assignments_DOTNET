@@ -1,0 +1,65 @@
+﻿@model IEnumerable<CS_WebApp.Models.Product>
+@{
+    ViewData["Title"] = "GetInfo";
+   // Layout = "~/Views/Shared/Error.cshtml";
+}
+
+<h1>GetInfo</h1>
+
+<p>
+    
+</p>
+
+<h3>@ViewBag.Message</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               ProductRowId
+            </th>
+            <th>
+                ProductId
+            </th>
+            <th>
+                ProductName
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                CategoryName
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductRowId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @ViewBag.CatRowName
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div>
+    <a asp-action="Search">Back to Search</a>
+</div>

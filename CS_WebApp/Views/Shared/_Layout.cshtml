@@ -17,31 +17,32 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <partial name = "_LoginPartial"/>
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
+                        </li>@*
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        </li>*@
                          <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Department" asp-action="Index">Department</a>
                         </li>
                          <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Index">Employee</a>
                         </li>
-                         <li class="nav-item">
+                         @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">User</a>
-                        </li>
+                        </li>*@
                          @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="RequestLog" asp-action="Index">RequestLog</a>
                         </li>*@
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="DeptEmpLists" asp-action="Index">DeptEmpLists</a>
-                        </li>
-                        <li class="nav-item">
+                        </li>*@
+                        @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="FileUpload" asp-action="Upload">FileUpload</a>
-                        </li>
+                        </li>*@
                          <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="ExceptionLog" asp-action="Index">ExceptionLog</a>
                         </li>
@@ -51,7 +52,14 @@
                          <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="CategoryClient" asp-action="Index">CategoryClient</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="ProductClient" asp-action="Index">ProductClient</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="SearchClient" asp-action="Search">SearchClient</a>
+                        </li>
                     </ul>
+                    
                 </div>
             </div>
         </nav>

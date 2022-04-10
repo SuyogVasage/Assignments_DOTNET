@@ -54,6 +54,16 @@
         public string? ErrorMessage { get; set; }
         public string? StackTrace { get; set; }  
     }
+
+    public class catANDprod
+    {
+        public int CategoryRowID { get; set; }
+        public string? CategoryName { get; set; }
+        public int BasePrice { get; set; }
+        public int ProductRowID { get; set; }
+        public string? ProductName { get; set; }
+        public int? Price { get; set; }
+    }
 }
 
 

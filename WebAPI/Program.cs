@@ -5,6 +5,9 @@
 // DbCOntext, Session, Cache, CORS, Custom Services
 // Caching, Security, COntroller Request Processing (Filters), etc.
 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -20,10 +23,47 @@ builder.Services.AddDistributedRedisCache(options => {
     options.Configuration = builder.Configuration.GetConnectionString("Redis");
 });
 
+builder.Services.AddDbContext<CodAuthDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AuthConnStr"));
+});
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<CodAuthDbContext>();
 
 //2. Regiser Custom services
 builder.Services.AddScoped<IService<Category, int>, CategoryService>();
 builder.Services.AddScoped<IService<Product, int>, ProductService>();
+
+// Logic for Token Verification
+byte[] secretKey = Convert.FromBase64String(builder.Configuration["JWTSettings:SecretKey"]);
+
+
+builder.Services.AddAuthentication(x =>
+{
+    // set the Scheme for HEader Value Verification
+    // HTTP Request Header MUST use the Authorzation:'Bearer <TOKEN-VALUE>'
+    // in Request
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+// Validate the Token
+.AddJwtBearer(x =>
+{
+    x.RequireHttpsMetadata = false;
+    x.SaveToken = true;
+    x.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true, // Signeture Verification
+        IssuerSigningKey = new SymmetricSecurityKey(secretKey),
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+});
+
+
+
+// Register the AUthService
+builder.Services.AddScoped<AuthService>();
 
 // Controll for API
 // Controll for API
@@ -35,7 +75,10 @@ builder.Services.AddControllers()
         {
             // SUpress the defualut Camel Casing for Property NAmes
             options.JsonSerializerOptions.PropertyNamingPolicy = null;
-        });
+        })
+        .AddNewtonsoftJson(options =>
+            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+        );
 
 builder.Services.AddCors(options => {
     options.AddPolicy("corspolicy", policy =>
@@ -64,15 +107,18 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Add the CORS Middleware
+app.UseCors("corspolicy");
+app.UseAuthentication();
 app.UseHttpsRedirection();
 
 
 app.UseAuthorization();
 
 //Custom Middleware of Exceptions
-//app.UseRequestException();
+app.UseRequestException();
 
-//app.UseLogRequest();
+app.UseLogRequest();
 
 // USe ROuting internally to map with the API COntroller and Call it  
 // THis uses the EndPoint as a Service using AddEndpointsApiExplorer() used in Service Collection

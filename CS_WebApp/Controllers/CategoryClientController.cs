@@ -21,6 +21,7 @@ namespace CS_WebApp.Controllers
         public IActionResult Create()
         {
             return View(new Category());
+
         }
         [HttpPost]
         public async Task<IActionResult> Create(Category category)
@@ -37,14 +38,16 @@ namespace CS_WebApp.Controllers
             }
         }
 
-        public IActionResult Edit()
+        public async Task<IActionResult> Edit(int id)
         {
-            return View(new Category());
+            var cats = await client.GetFromJsonAsync<Category>("https://localhost:7092/api/Category/"+id);
+            return View(cats);
         }
-        [HttpPut]
-        public async Task<IActionResult> Edit(Category category)
+        [HttpPost]
+        public async Task<IActionResult> Edit(Category category, int id)
         {
-            var response = await client.PutAsJsonAsync<Category>("https://localhost:7092/api/Category", category);
+            category.CategoryRowId = id;
+            var response = await client.PutAsJsonAsync<Category>("https://localhost:7092/api/Category/"+id, category);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -56,22 +59,27 @@ namespace CS_WebApp.Controllers
             }
         }
 
-        public IActionResult Delete()
+        public async Task<IActionResult> Delete(int id)
         {
-            return View(new Category());
+            var cats = await client.GetFromJsonAsync<Category>("https://localhost:7092/api/Category/"+id);
+            return View(cats);
         }
-        //public async Task<IActionResult> Delete(Category category)
-        //{
-        //    var response = await client.DeleteAsync<Category>("https://localhost:7092/api/Category", category);
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        return RedirectToAction("Index");
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Message = "No Succes";
-        //        return View(category);
-        //    }
-        //}
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, Category cat)
+        {
+            var response = await client.DeleteAsync("https://localhost:7092/api/Category/" + id);
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.Message = "No Success";
+                return View(id);
+            }
+        }
+
+
     }
 }
