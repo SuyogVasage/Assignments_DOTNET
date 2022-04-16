@@ -1,0 +1,13 @@
+﻿@model IEnumerable<CS_WebApp.Models.Department>
+
+@{
+    ViewData["Title"] = "ShowDeptRecords";
+}
+
+<h1>Department Records</h1>
+
+@foreach(var dept in Model)
+{
+    <partial name="DeptDetail" model="dept"></partial>
+}
+

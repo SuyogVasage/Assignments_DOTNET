@@ -1,0 +1,27 @@
+﻿@model Naukari_24March.Models.ProfileData
+@{
+    ViewData["Title"] = "UploadLogo";
+}
+
+<h1>Upload Photo</h1>
+<form enctype="multipart/form-data" method="post">
+    <dl>
+        <dt>
+            Logo image size should be less than 500KB.
+            Image should be only .jpg or .png type.
+        </dt>
+        <dd>
+            <input asp-for="@Model.ProfilePicture" type="file">
+            <span asp-validation-for="@Model.ProfilePicture"></span>
+        </dd>
+         <div class="container">
+         @Model.UploadStatus
+     </div>
+    </dl>
+    <hr/>
+    
+    <hr/>
+    <input  class="btn btn-success" type="submit" value="Next" />
+
+    <a asp-action="Create" asp-controller="EmployerInfo">GO Back</a>
+</form>

@@ -1,0 +1,44 @@
+﻿@model CS_WebApp.Models.Department
+
+<div class="container">
+     <table class="table table-bordered table-striped">
+         <tbody>
+             <tr>
+                 <td>
+                      @Html.DisplayNameFor(model => model.DeptNo)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(model => model.DeptNo)
+                 </td>
+             </tr>
+               <tr>
+                 <td>
+                      @Html.DisplayNameFor(model => model.DeptName)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(model => model.DeptName)
+                 </td>
+             </tr>
+               <tr>
+                 <td>
+                      @Html.DisplayNameFor(model => model.Location)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(model => model.Location)
+                 </td>
+             </tr>
+               <tr>
+                 <td>
+                      @Html.DisplayNameFor(model => model.Capacity)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(model => model.Capacity)
+                 </td>
+             </tr>
+         </tbody>
+     </table>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DeptNo }) |
+    <a asp-action="Index">Back to List</a>
+</div>

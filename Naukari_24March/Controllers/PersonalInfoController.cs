@@ -8,6 +8,8 @@ using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Naukari_24March.Controllers
 {
@@ -16,15 +18,15 @@ namespace Naukari_24March.Controllers
         private readonly IService<PersonalInfo, int> personalInfoService;
         private readonly IService<EducationInfo, int> educationService;
         private readonly IService<ProfessionalInfo, int> professionalService;
-        //private readonly IFormFile fileProvider;
 
         public PersonalInfoController(IService<PersonalInfo, int> personalInfoService, IService<EducationInfo, int> educationService, IService<ProfessionalInfo, int> professionalService)
         {
             this.personalInfoService = personalInfoService;
             this.educationService = educationService;
             this.professionalService = professionalService;
-            //this.fileProvider = fileProvider;
         }
+
+        [Authorize(Roles = "Employer")]
         public IActionResult Index()
         {
             var personalData = personalInfoService.GetAsync().Result.ToList();
@@ -58,8 +60,10 @@ namespace Naukari_24March.Controllers
             return View(details);
         }
 
+        [Authorize(Roles = "JobSeeker")]
         public IActionResult Create()
         {
+            GenderItem();
             var per = HttpContext.Session.GetObject<PersonalInfo>("Personal");
             if (per == null)
             {
@@ -71,6 +75,7 @@ namespace Naukari_24March.Controllers
         [HttpPost]
         public IActionResult Create(PersonalInfo personalInfo)
         {
+            GenderItem();
             if (ModelState.IsValid)
             {
                 HttpContext.Session.SetObject<PersonalInfo>("Personal", personalInfo);
@@ -82,8 +87,17 @@ namespace Naukari_24March.Controllers
             }
         }
 
-        public IActionResult Details( int id)
+        [Authorize(Roles ="JobSeeker")]
+        public IActionResult Details()
         {
+            ShowAllInfo show1 = new ShowAllInfo();
+            var Loginid = HttpContext.Session.GetString("LoginID");
+            var id = personalInfoService.GetAsync().Result.Where(x => x.UserId == Loginid).Select(y=>y.CandidateId).FirstOrDefault();
+            if(id == 0)
+            {
+                ViewBag.Message = "First Add Your Information";
+                return View(show1);
+            }
             var education = educationService.GetAsync().Result.ToList().Where(x=>x.CandidateId == id).FirstOrDefault();
             var personal = personalInfoService.GetAsync(id).Result;
             var professional = professionalService.GetAsync().Result.ToList().Where(x => x.CandidateId == id).FirstOrDefault();
@@ -113,6 +127,44 @@ namespace Naukari_24March.Controllers
                 ImgPath = personal.ImgPath,
             };
             return View(show);
+        }
+
+        public IActionResult Edit()
+        {
+            var Loginid = HttpContext.Session.GetString("LoginID");
+            var id = personalInfoService.GetAsync().Result.Where(x => x.UserId == Loginid).Select(y => y.CandidateId).FirstOrDefault();
+            
+            var result = personalInfoService.GetAsync(id).Result;
+            return View(result);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(PersonalInfo per)
+        {
+            if (ModelState.IsValid)
+            {
+                var Loginid = HttpContext.Session.GetString("LoginID");
+                var id = personalInfoService.GetAsync().Result.Where(x => x.UserId == Loginid).Select(y => y.CandidateId).FirstOrDefault();
+                per.CandidateId = id;
+                var result = personalInfoService.UpdateAsync(id, per).Result;
+                return RedirectToAction("Details");
+            }
+            else
+            {
+                return View(per);
+            }
+
+        }
+
+        public void GenderItem()
+        {
+            List<SelectListItem> Gender = new List<SelectListItem>();
+            Gender.Add(new SelectListItem() { Text = "Male", Value = "Male" });
+            Gender.Add(new SelectListItem() { Text = "Female", Value = "Female" });
+            Gender.Add(new SelectListItem() { Text = "Transgender", Value = "Transgender" });
+            Gender.Add(new SelectListItem() { Text = "No to Answer", Value = "Not to Anwser" });
+
+            ViewBag.Gender = Gender;
         }
     }
 }

@@ -1,0 +1,165 @@
+﻿@page "/empcrud"
+@using Blazor_Wasm.Models;
+<!--UI for the COmponent-->
+<h3>Employee CRUD</h3>
+
+<input type="radio" id="Sort" name="choice" value="True">
+<label for="Sort">Sort</label><br>
+
+<input type="radio" id="Reverse" name="choice" value="True">
+<label for="Reverse">Reverse</label><br>
+
+<EditForm Model="employee">
+<table class="table table-bordered table-striped">
+    <tbody>
+        <tr>
+            <td>
+                EmpNo
+            </td>
+            <td>
+                <InputNumber  @bind-Value="employee.EmpNo" class="form-control"></InputNumber>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                EmpName
+            </td>
+            <td>
+                <InputText @bind-Value="employee.EmpName" class="form-control"></InputText>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                DeptName
+            </td>
+            <td>
+                <InputSelect @bind-Value="employee.DeptName" class="form-control">
+                    <!--Generating UI based on Data-->
+                   @foreach (var dname in departments)
+                   {
+                       <option value="@dname">@dname</option>
+                   }
+                </InputSelect>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Designation
+            </td>
+            <td>
+                <InputSelect @bind-Value="employee.Designation" class="form-control">
+                     <!--Generating UI based on Data-->
+                   @foreach (var desig in designations)
+                   {
+                       <option value="@desig">@desig</option>
+                   }
+                </InputSelect>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Salary
+            </td>
+            <td>
+                 <InputNumber  @bind-Value="employee.Salary" class="form-control"></InputNumber>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>
+                <input type="button" value="Clear" class="btn btn-warning"
+                 @onclick="clear"/>
+            </td>
+            <td>
+                <input type="button" value="Save" class="btn btn-success"
+                 @onclick="save"/>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+<hr/>
+<div class="container">
+   @* @System.Text.Json.JsonSerializer.Serialize(employees)*@
+  @* <table class="table table-bordered table-striped">
+       <thead>
+           <tr>
+               <th>EmpNo</th>
+               <th>EmpName</th>
+               <th>DeptName</th>
+               <th>Designation</th>
+               <th>Salary</th>
+           </tr>
+       </thead>
+       <tbody>
+                @foreach (var emp in employees)
+                {
+                     <tr @onclick="() => edit(emp.EmpNo)">
+                         <td>@emp.EmpNo</td>
+                         <td>@emp.EmpName</td>
+                         <td>@emp.DeptName</td>
+                         <td>@emp.Designation</td>
+                         <td>@emp.Salary</td>
+                     </tr>
+                }
+            </tbody>
+   </table>*@
+
+   <Table DataSource="@employees"
+     onEmployeeSelected="edit"
+      headers="@headers"></Table>
+</div>
+</EditForm>
+
+<!--Logic for The component with
+    Proeprties
+    Methods
+-->
+@code {
+    // Data Members that will be exposed to UI for Read/Write Operations
+    Employee employee;
+    EmployeeDB employees;
+    List<string> departments;
+    List<string> designations;
+    List<string> headers;
+
+    /// <summary>
+    /// Method that will be executed when the COmponent list abut to Load
+    /// </summary>
+    /// <returns></returns>
+    protected override Task OnInitializedAsync()
+    {
+        employee = new Employee();
+        employees = new EmployeeDB();
+        departments = new List<string>() { "IT", "HRD", "System", "Training" };
+        designations = new List<string>() { "Manager", "Lead", "Engineer", "Operator", "Clerk" };
+        headers = new List<string>();
+
+         var ep = employee.GetType().GetProperties(System.Reflection.BindingFlags.DeclaredOnly | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+          foreach (var data in ep)
+        {
+
+            headers.Add(data.Name);
+
+        }
+
+        return base.OnInitializedAsync();
+    }
+
+    void clear()
+    {
+        employee = new Employee();
+    }
+    void save()
+    {
+        employees.Add(employee);        
+    }
+    void edit(int empNo)
+    {
+       employee = employees.Find(x=>x.EmpNo == empNo);
+    }
+    void getSelectedEmployee(int id)
+    {
+        employee = employees.Where(e => e.EmpNo == id).FirstOrDefault();   
+    }
+}

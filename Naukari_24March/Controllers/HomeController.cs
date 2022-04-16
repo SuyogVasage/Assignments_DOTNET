@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Naukari_24March.Models;
 using System;
@@ -20,7 +22,9 @@ namespace Naukari_24March.Controllers
 
         public IActionResult Index()
         {
+            //ViewBag.LoginID = HttpContext.Session.GetString("LoginID");
             return View();
+
         }
 
         public IActionResult Privacy()

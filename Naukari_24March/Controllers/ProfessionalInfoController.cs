@@ -5,17 +5,18 @@ using System;
 using Microsoft.AspNetCore.Http;
 using Naukari_24March.CustomSession;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Naukari_24March.Controllers
 {
     public class ProfessionalInfoController : Controller
     {
         private readonly IService<ProfessionalInfo, int> professionalService;
-        List<ProfessionalInfo> professionalInfos;   
-        public ProfessionalInfoController(IService<ProfessionalInfo, int> professionalService)
+        private readonly IService<PersonalInfo, int> personalInfoService;
+        public ProfessionalInfoController(IService<ProfessionalInfo, int> professionalService, IService<PersonalInfo, int> personalInfoService)
         {
             this.professionalService = professionalService;
-            professionalInfos = new List<ProfessionalInfo>();
+            this.personalInfoService = personalInfoService;
         }
         public IActionResult Index()
         {
@@ -46,6 +47,52 @@ namespace Naukari_24March.Controllers
             {
                 return View(professionalInfo);
             }
+        }
+
+        public IActionResult Edit()
+        {
+            var Loginid = HttpContext.Session.GetString("LoginID");
+            var personid = personalInfoService.GetAsync().Result.Where(x => x.UserId == Loginid).Select(y => y.CandidateId).FirstOrDefault();
+            var id = professionalService.GetAsync().Result.Where(x => x.CandidateId == personid).Select(y => y.InfoId).FirstOrDefault();
+            var result = professionalService.GetAsync(id).Result;
+            return View(result);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(ProfessionalInfo per)
+        {
+            if (ModelState.IsValid)
+            {
+                var Loginid = HttpContext.Session.GetString("LoginID");
+                var personid = personalInfoService.GetAsync().Result.Where(x => x.UserId == Loginid).Select(y => y.CandidateId).FirstOrDefault();
+                var id = professionalService.GetAsync().Result.Where(x => x.CandidateId == personid).Select(y => y.InfoId).FirstOrDefault();
+                var result = professionalService.UpdateAsync(id, per).Result;
+                return RedirectToAction("Details", "PersonalInfo");
+            }
+            else
+            {
+                return View(per);
+            }
+
+        }
+
+        public IActionResult Delete()
+        {
+            var Loginid = HttpContext.Session.GetString("LoginID");
+            var personid = personalInfoService.GetAsync().Result.Where(x => x.UserId == Loginid).Select(y => y.CandidateId).FirstOrDefault();
+            var id = professionalService.GetAsync().Result.Where(x => x.CandidateId == personid).Select(y => y.InfoId).FirstOrDefault();
+            var result = professionalService.GetAsync(id).Result;
+            return View(result);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(ProfessionalInfo per)
+        {
+            var Loginid = HttpContext.Session.GetString("LoginID");
+            var personid = personalInfoService.GetAsync().Result.Where(x => x.UserId == Loginid).Select(y => y.CandidateId).FirstOrDefault();
+            var id = professionalService.GetAsync().Result.Where(x => x.CandidateId == personid).Select(y => y.InfoId).FirstOrDefault();
+            var result = professionalService.DeleteAsync(id).Result;
+            return RedirectToAction("Details", "PersonalInfo");
         }
     }
 }

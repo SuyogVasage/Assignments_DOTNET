@@ -87,12 +87,7 @@ namespace Naukari_24March.Services
                 {
                     return null;
                 }
-                info.FullName = entity.FullName;
-                info.MobileNo = entity.MobileNo;
-                info.Email = entity.Email;
-                info.Address = entity.Address;
-                info.ImgPath = entity.ImgPath;
-                info.ResumePath = entity.ResumePath;
+                ctx.Entry(info).CurrentValues.SetValues(entity);
                 await ctx.SaveChangesAsync();
                 return info;
             }

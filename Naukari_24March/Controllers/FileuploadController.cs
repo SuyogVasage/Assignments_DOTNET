@@ -148,6 +148,11 @@ namespace Naukari_24March.Controllers
             var personalInfo1 = HttpContext.Session.GetObject<PersonalInfo>("Personal");
             personalInfo1.ImgPath = Convert.ToString(HttpContext.Session.GetString("ImgPath"));
             personalInfo1.ResumePath = Convert.ToString(HttpContext.Session.GetString("ResumePath"));
+            personalInfo1.Status = "Looking For Job";
+            personalInfo1.UserId = HttpContext.Session.GetString("LoginID");
+            personalInfo1.Email = HttpContext.Session.GetString("EmailID");
+
+
             var result = personalInfoService.CreateAsync(personalInfo1).Result;
 
             int id = personalInfoService.GetAsync().Result.ToList().OrderByDescending(x => x.CandidateId).Select(s => s.CandidateId).FirstOrDefault();

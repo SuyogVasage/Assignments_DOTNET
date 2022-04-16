@@ -88,19 +88,7 @@ namespace Naukari_24March.Services
                 {
                     return null;
                 }
-                info.CandidateId = entity.CandidateId;
-                info.SscpassYear = entity.SscpassYear;
-                info.Sscpercentage = entity.Sscpercentage;
-                info.HscpassYear = entity.HscpassYear;
-                info.Hscpercentage = entity.Hscpercentage;
-                info.DiplomaPassYear = entity.DiplomaPassYear;
-                info.DiplomaPercentage = entity.DiplomaPercentage;
-                info.DegreePassYear = entity.DegreePassYear;
-                info.DegreePercentage = entity.DegreePercentage;
-                info.DegreeName = entity.DegreeName;
-                info.MastersPassYear = entity.MastersPassYear;
-                info.MastersPercentage = entity.MastersPercentage;
-                info.MastersName = entity.MastersName;
+                ctx.Entry(info).CurrentValues.SetValues(entity);
                 await ctx.SaveChangesAsync();
                 return info;
             }

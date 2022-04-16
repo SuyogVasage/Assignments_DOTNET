@@ -30,6 +30,7 @@ builder.Services.AddDbContext<CodAuthDbContext>(options =>
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<CodAuthDbContext>();
 
+
 //2. Regiser Custom services
 builder.Services.AddScoped<IService<Category, int>, CategoryService>();
 builder.Services.AddScoped<IService<Product, int>, ProductService>();
@@ -116,9 +117,9 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 //Custom Middleware of Exceptions
-app.UseRequestException();
+//app.UseRequestException();
 
-app.UseLogRequest();
+//app.UseLogRequest();
 
 // USe ROuting internally to map with the API COntroller and Call it  
 // THis uses the EndPoint as a Service using AddEndpointsApiExplorer() used in Service Collection

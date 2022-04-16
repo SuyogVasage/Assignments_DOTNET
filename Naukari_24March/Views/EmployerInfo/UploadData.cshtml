@@ -1,0 +1,12 @@
+﻿@model Naukari_24March.Models.Upload
+@{
+    ViewData["Title"] = "UploadData";
+}
+
+<form asp-action="UploadData">
+    <div class="container">
+        <b>@Model.UploadStatus</b> <br>
+    </div>
+    <a asp-action="Index" asp-controller="Home">Finish</a>
+</form>
+

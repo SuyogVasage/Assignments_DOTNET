@@ -12,6 +12,12 @@ create table PersonalInfo (
 	ResumePath varchar(300) not null
 );
 
+alter table PersonalInfo add Status varchar(50)
+alter table PersonalInfo add UserID varchar(100)
+alter table PersonalInfo add Gender varchar(20)
+
+alter table EmployerInfo add UserID varchar(100) 
+
 create table EducationInfo (
 	EduID int identity(1,1) primary key,
 	CandidateID int not null References PersonalInfo(CandidateID),
@@ -37,6 +43,19 @@ create table ProfessionalInfo (
 	Projects varchar(500)
 );
 
+create table EmployerInfo (
+	EmpID int identity(1,1) primary key,
+	FullName varchar(100) not null,
+	MobileNo varchar(50) not null,
+	Email varchar(50) not null,
+	Role varchar(200) not null,
+	CompanyName varchar(200) not null,
+	Description varchar(300) not null,
+	CompanyHeadquarters varchar(200) not null,
+	NumberOfBranches int not null,
+	LogoPath varchar(300) not null,
+);
+
 select * from PersonalInfo
 select * from EducationInfo
 select * from ProfessionalInfo
@@ -44,26 +63,3 @@ select * from ProfessionalInfo
 drop table ProfessionalInfo
 drop table EducationInfo
 drop table PersonalInfo
-
-DELETE FROM PersonalInfo WHERE CandidateID = 2;
-DELETE FROM PersonalInfo WHERE CandidateID = 3;
-DELETE FROM PersonalInfo WHERE CandidateID = 4;
-DELETE FROM PersonalInfo WHERE CandidateID = 5;
-DELETE FROM PersonalInfo WHERE CandidateID = 6;
-DELETE FROM PersonalInfo WHERE CandidateID = 7;
-DELETE FROM PersonalInfo WHERE CandidateID = 8;
-
-DELETE FROM EducationInfo WHERE CandidateID = 2;
-DELETE FROM EducationInfo WHERE CandidateID = 3;
-DELETE FROM EducationInfo WHERE CandidateID = 4;
-DELETE FROM EducationInfo WHERE CandidateID = 5;
-DELETE FROM EducationInfo WHERE CandidateID = 6;
-DELETE FROM EducationInfo WHERE CandidateID = 7;
-DELETE FROM EducationInfo WHERE CandidateID = 8;
-
-DELETE FROM ProfessionalInfo WHERE InfoID = 2;
-DELETE FROM ProfessionalInfo WHERE InfoID = 3;
-DELETE FROM ProfessionalInfo WHERE InfoID = 4;
-DELETE FROM ProfessionalInfo WHERE InfoID = 5;
-DELETE FROM ProfessionalInfo WHERE InfoID = 6;
-DELETE FROM ProfessionalInfo WHERE InfoID = 1;

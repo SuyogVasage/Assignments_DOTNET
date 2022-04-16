@@ -118,6 +118,12 @@ namespace CS_WebApp.Controllers
             return RedirectToAction("Index", "Employee");
         }
 
+        public IActionResult ShowDeptRecords()
+        {
+            var res = departmentService.GetAsync().Result;
+            return View(res);
+        }
+
 
         //Directly Delete and will not go for another view
         //[HttpPost]

@@ -1,8 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-
-#nullable disable
 
 namespace Naukari_24March.Models
 {
@@ -18,6 +17,7 @@ namespace Naukari_24March.Models
         }
 
         public virtual DbSet<EducationInfo> EducationInfos { get; set; }
+        public virtual DbSet<EmployerInfo> EmployerInfos { get; set; }
         public virtual DbSet<PersonalInfo> PersonalInfos { get; set; }
         public virtual DbSet<ProfessionalInfo> ProfessionalInfos { get; set; }
 
@@ -67,6 +67,61 @@ namespace Naukari_24March.Models
                     .HasConstraintName("FK__Education__Candi__5EBF139D");
             });
 
+            modelBuilder.Entity<EmployerInfo>(entity =>
+            {
+                entity.HasKey(e => e.EmpId)
+                    .HasName("PK__Employer__AF2DBA7910338F1F");
+
+                entity.ToTable("EmployerInfo");
+
+                entity.Property(e => e.EmpId).HasColumnName("EmpID");
+
+                entity.Property(e => e.CompanyHeadquarters)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CompanyName)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Description)
+                    .IsRequired()
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FullName)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LogoPath)
+                    .IsRequired()
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MobileNo)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Role)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserId)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("UserID");
+            });
+
             modelBuilder.Entity<PersonalInfo>(entity =>
             {
                 entity.HasKey(e => e.CandidateId)
@@ -91,6 +146,10 @@ namespace Naukari_24March.Models
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Gender)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.ImgPath)
                     .IsRequired()
                     .HasMaxLength(300)
@@ -105,6 +164,15 @@ namespace Naukari_24March.Models
                     .IsRequired()
                     .HasMaxLength(300)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Status)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserId)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("UserID");
             });
 
             modelBuilder.Entity<ProfessionalInfo>(entity =>

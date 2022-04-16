@@ -87,10 +87,7 @@ namespace Naukari_24March.Services
                 {
                     return null;
                 }
-                info.CandidateId = entity.CandidateId;
-                info.ExpInYears = entity.ExpInYears;
-                info.Companies = entity.Companies;
-                info.Projects = entity.Projects;
+                ctx.Entry(info).CurrentValues.SetValues(entity);
                 await ctx.SaveChangesAsync();
                 return info;
             }

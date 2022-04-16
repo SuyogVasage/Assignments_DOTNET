@@ -12,16 +12,6 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @*<div class="form-group">
-                <label asp-for="EduId" class="control-label"></label>
-                <input asp-for="EduId" class="form-control" />
-                <span asp-validation-for="EduId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CandidateId" class="control-label"></label>
-                <input asp-for="CandidateId" class="form-control" />
-                <span asp-validation-for="CandidateId" class="text-danger"></span>
-            </div>*@
             <div class="form-group">
                 <label>SSC Pass Year</label>
                 <select asp-for="SscpassYear"  asp-items="ViewBag.Passyear" class ="form-control">
